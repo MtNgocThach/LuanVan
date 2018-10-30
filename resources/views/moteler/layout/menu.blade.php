@@ -7,12 +7,6 @@
             </a>
           </li>
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-            <a class="nav-link" href="moteler/bill/list">
-              <i class="fa fa-fw fa-dashboard"></i>
-              <span class="nav-link-text">Thanh Toán</span>
-            </a>
-          </li>
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
             <a class="nav-link" href="moteler/motels/list">
               <i class="fa fa-fw fa-dashboard"></i>
               <span class="nav-link-text">Nhà Trọ</span>

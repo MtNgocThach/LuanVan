@@ -1,0 +1,50 @@
+.active{
+	font-family: inherit;
+    font-size: x-large;
+}
+.view_all{
+	float: right;
+	margin-right: 20px;
+	margin-bottom: 10px;
+}
+.item img{
+	height: 400px;
+}
+/* Remove the navbar's default rounded borders and increase the bottom margin */ 
+.navbar {
+ 	margin-bottom: 50px;
+    border-radius: 0;
+}
+/* Remove the jumbotron's default bottom margin */ 
+.jumbotron {
+    margin-bottom: 0;
+}
+/* Add a gray background color and some padding to the footer */
+footer {
+    background-color: #f2f2f2;
+    padding: 25px;
+}
+.row{
+	clear:both;	
+}
+input[type=text] {
+		width: 200px;
+		box-sizing: border-box;
+		border: 2px solid #ccc;
+		border-radius: 4px;
+		font-size: 16px;
+		background-color: white;
+		background-image: url('searchicon.png');
+		background-position: 10px 10px; 
+		background-repeat: no-repeat;
+		padding: 12px 20px 12px 10px;
+		-webkit-transition: width 0.4s ease-in-out;
+		transition: width 0.4s ease-in-out;
+}
+.contact {
+    padding-right: 80px;
+    padding-left: 80px;
+    margin-right: auto;
+    margin-left: auto;
+	height:250px;
+}

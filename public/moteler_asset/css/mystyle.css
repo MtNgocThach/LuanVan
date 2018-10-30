@@ -1,0 +1,18 @@
+
+thead tr th{
+	text-align: center;
+}
+
+tbody tr td:nth-child(1){
+	text-align: center;
+}
+
+
+
+/*form: add_*/
+.content-wrapper{
+	padding-top: 0rem;
+}
+
+/*end form: add_*/
+

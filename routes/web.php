@@ -68,6 +68,21 @@ Route::group(['prefix'=>'moteler','middleware'=>'motelerLogin'],function(){
         Route::post('edit/{id}','profileCtrl@postEdit');
         
     });
+
+    // sales
+    Route::group(['prefix'=>'sales'],function(){
+
+        Route::get('list','salesCtrl@getList');
+
+//        Route::get('del/{id}','catalogue_roomCtrl@getDel');
+//
+//        Route::get('edit/{id}','catalogue_roomCtrl@getEdit');
+//        Route::post('edit/{id}','catalogue_roomCtrl@postEdit');
+//
+//        Route::get('add','catalogue_roomCtrl@getAdd');
+//        Route::post('add','catalogue_roomCtrl@postAdd');
+
+    });
     
     // catalogue_room
     Route::group(['prefix'=>'catalogue_room'],function(){

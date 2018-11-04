@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 
 use App\rooms;
 use App\services;
-
-
 class salesCtrl extends Controller
 {
     //
@@ -22,5 +20,7 @@ class salesCtrl extends Controller
     public function createSales(){
 
         return redirect('moteler/sales/list')->with('mess','Lưu Hoá Đơn Thành công');
+//        $ctls = catalogue_room::all();
+        return view('moteler.sales.list');
     }
 }

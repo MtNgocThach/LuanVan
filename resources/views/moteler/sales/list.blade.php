@@ -86,10 +86,9 @@
                     </table>
                 </form>
             </div>
-        </div>
+            <i class="fa fa-table"></i> Thanh Toán</div>
 
     </div>
-
 @endsection
 <style >
     tbody tr td:nth-child(3) div input, td:nth-child(5) div input, td:nth-child(6) div input, td:nth-child(7) div input, td:nth-child(10) div input{
@@ -111,3 +110,4 @@
     }
 
 </style>
+@endsection

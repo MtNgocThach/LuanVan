@@ -78,6 +78,7 @@ Route::group(['prefix'=>'moteler','middleware'=>'motelerLogin'],function(){
 //
 //        Route::get('edit/{id}','catalogue_roomCtrl@getEdit');
         Route::post('create','salesCtrl@createSales');
+//        Route::post('edit/{id}','catalogue_roomCtrl@postEdit');
 //
 //        Route::get('add','catalogue_roomCtrl@getAdd');
 //        Route::post('add','catalogue_roomCtrl@postAdd');

@@ -34,7 +34,9 @@ class catalogue_roomCtrl extends Controller
         $ctl->name = $res->name;
         $ctl->numpers = $res->numpers;
         $ctl->price = $res->price;
-        $ctl->description = $res->des;
+        if(!empty($res->des)){
+            $ctl->description = $res->des;
+        }
 
         $ctl->save();
 

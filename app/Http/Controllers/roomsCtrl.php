@@ -8,6 +8,13 @@ use App\catalogue_room;
 
 class roomsCtrl extends Controller
 {
+    public function getListRent(){
+
+        $rooms = rooms::where('status','0')->get();
+        return view('moteler.rooms.rent',['rooms'=>$rooms]);
+
+    }
+
     //Danh Sách
     public function getList(){
         $rooms = rooms::all();

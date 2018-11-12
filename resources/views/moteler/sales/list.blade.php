@@ -40,18 +40,24 @@
                         @foreach($rooms as $room)
 <!--                            --><?php //$i = $room->name; ?>
                             @if($motel->id == $room->id_mls)
-                                {{--<from class="contact100-form validate-form" action="moteler/sales/create" method="POST">--}}
-                                {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
-
                                 <tr>
-                                    <td id="room_name">{{$motel->name}} - {{ $room->name }}</td>
+                                    @foreach( $renters as $renter)
+                                        <td id="room_name">
+                                            <div>{{$motel->name}} - {{ $room->name }}</div>
+                                            @if($room->id == $renter->id_room)
+                                                <div>{{ $renter->last_name }}</div>
+                                            @endif
+                                        </td>
+
+                                        {{--@endif--}}
+                                    @endforeach
                                     <td style="text-align: left">
                                         <div>Cũ</div>
                                         <div>Mới</div>
                                     </td>
                                     <td>
                                         <div><input type="text" id="no_elec_old" name="no_elec_old{{ $room->id }}" readonly="true" value="{{ $room->no_elec }}"></div>
-                                        <div><input type="text" id="no_elec_new" name="no_elec_new{{ $room->id }}" value="352"></div>
+                                        <div><input type="text" id="no_elec_new" name="no_elec_new{{ $room->id }}" value=""></div>
                                     </td>
                                     <td style="text-align: left">
                                         <div>Cũ</div>
@@ -59,7 +65,7 @@
                                     </td>
                                     <td>
                                         <div><input type="text" id="no_water_old" name="no_water_old{{ $room->id }}" readonly="true" value="{{ $room->no_water }}"></div>
-                                        <div><input type="text" id="no_water_new" name="no_water_new{{ $room->id }}" value="352"></div>
+                                        <div><input type="text" id="no_water_new" name="no_water_new{{ $room->id }}" value=""></div>
                                     </td>
                                     <td>
                                         @foreach($sers as $ser)

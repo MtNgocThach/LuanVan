@@ -118,7 +118,9 @@ Route::group(['prefix'=>'moteler','middleware'=>'motelerLogin'],function(){
     Route::group(['prefix'=>'rooms'],function(){
         
         Route::get('list','roomsCtrl@getList');
-        
+
+        Route::get('rent','roomsCtrl@getListRent');
+
         Route::get('del/{id}','roomsCtrl@getDel');
         
         Route::get('edit/{id}','roomsCtrl@getEdit');

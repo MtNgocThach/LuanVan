@@ -1,17 +1,23 @@
 <div class="collapse navbar-collapse" id="navbarResponsive">
+
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-            <a class="nav-link" href="moteler/catalogue_room/list">
-              <i class="fa fa-fw fa-dashboard"></i>
-              <span class="nav-link-text">Loại Phòng</span>
-            </a>
-          </li>
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-            <a class="nav-link" href="moteler/motels/list">
-              <i class="fa fa-fw fa-dashboard"></i>
-              <span class="nav-link-text">Nhà Trọ</span>
-            </a>
-          </li>
+            <?php
+                $user_L = Auth::user();
+                if($user_L->username != "admin"){
+            ?>
+
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                <a class="nav-link" href="moteler/catalogue_room/list">
+                  <i class="fa fa-fw fa-dashboard"></i>
+                  <span class="nav-link-text">Loại Phòng</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                <a class="nav-link" href="moteler/motels/list">
+                    <i class="fa fa-fw fa-dashboard"></i>
+                    <span class="nav-link-text">Nhà Trọ</span>
+                </a>
+            </li>
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
             <a class="nav-link" href="moteler/services/list">
               <i class="fa fa-fw fa-dashboard"></i>
@@ -24,7 +30,26 @@
               <span class="nav-link-text">Thông tin</span>
             </a>
           </li>
-          
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+            <a class="nav-link" href="moteler/sales/list">
+              <i class="fa fa-fw fa-dashboard"></i>
+              <span class="nav-link-text">Thanh Toán Trọ</span>
+            </a>
+          </li>
+          <?php }else{ ?>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                    <a class="nav-link" href="admin/account/list">
+                        <i class="fa fa-fw fa-dashboard"></i>
+                        <span class="nav-link-text">Tài Khoản</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                    <a class="nav-link" href="admin/account/listMotels">
+                        <i class="fa fa-fw fa-dashboard"></i>
+                        <span class="nav-link-text">Phòng trọ</span>
+                    </a>
+                </li>
+          <?php } ?>
         </ul>
         <ul class="navbar-nav sidenav-toggler">
           <li class="nav-item">
@@ -52,12 +77,12 @@
           <?php $user_L = Auth::user() ?>
           @if(isset($user_L))
               <li class="nav-item">
-                <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                <a class="nav-link" data-toggle="modal" data-target="#modalLogin">
                   <i class="fa fa-fw "></i>Xin Chào: {{ $user_L->username }}</a>
               </li>
               <li class="nav-item nav-link">|</li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                <a class="nav-link" data-toggle="modal" data-target="#modalLogin">
                   <i class="fa fa-fw fa-sign-out"></i>Đăng xuất</a>
               </li>
             

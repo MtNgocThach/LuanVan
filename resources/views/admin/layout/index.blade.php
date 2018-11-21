@@ -50,8 +50,6 @@
    {{--  nội dung  --}}
    @yield('content')
 
-
-    
     {{-- @include('moteler.layout.footer') --}}
     
     <!-- Scroll to Top Button-->

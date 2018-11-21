@@ -18,27 +18,50 @@
 					Thêm Loại Phòng
 				</span>
 
-				<div class="wrap-input100 validate-input bg1" data-validate="Vui lòng điền tên loại phòng">
-					<span class="label-input100">Loại Phòng *</span>
-					<input class="input100" type="text" name="name" placeholder="Loại phòng">
+				{{--<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Vui lòng điền tên loại phòng">--}}
+					{{--<span class="label-input100">Loại Phòng *</span>--}}
+					{{--<input class="input100" type="text" name="name" placeholder="Loại phòng">--}}
+				{{--</div>--}}
+				<div class="wrap-input100 bg1 rs1-wrap-input100 rs1-wrap-input100" data-validate = "Vui lòng chọn loại phòng trọ">
+					<span class="label-input100">Phòng trọ</span>
+					<select name="id_ctl" id="" class="input100" class="validate-input" style="border-radius:5px; width:90%">
+						@foreach( $ctls as $ctl)
+							<option value="{{ $ctl->id }}">
+								{{ $ctl->name }}
+							</option>
+
+						@endforeach
+					</select>
+				</div>
+				<div class="wrap-input100 bg1 rs1-wrap-input100 rs1-wrap-input100" data-validate = "Vui lòng chọn tên phòng trọ">
+					<span class="label-input100">Phòng trọ</span>
+					<select name="id_mtl" id="" class="input100" class="validate-input" style="border-radius:5px; width:90%">
+						@foreach( $mtls as $mtl)
+							<option value="{{ $mtl->id }}">
+								{{ $mtl->name }}
+							</option>
+
+						@endforeach
+					</select>
 				</div>
 
 				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Vui lòng điền số người ở...">
 					<span class="label-input100">Số người *</span>
-					<input class="input100" type="number" name="numpers" placeholder="Số người ">
+					<input class="input100" type="" name="numpers" placeholder="Số người ">
 				</div>
 
 				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Vui lòng điền giá loại phòng">
 					<span class="label-input100">Giá *</span>
-					<input class="input100" type="number" name="price" placeholder="Giá phòng">
+					<input class="input100" type="" name="price" placeholder="Giá phòng">
 				</div>
 
+				<div class="wrap-input100  bg0 rs1-alert-validate rs1-wrap-input100">
+					<span class="label-input100">Diện tích</span>
+					<input class="input100" type="text" name="area" >
+				</div>
 
-				
-
-				<div class="wrap-input100  bg0 rs1-alert-validate">
+				<div class="wrap-input100  bg0 rs1-alert-validate rs1-wrap-input100">
 					<span class="label-input100">Mô tả</span>
-					{{--  <textarea class="input100" name="des" placeholder="Mô tả..."></textarea>  --}}
 					<input class="input100" type="text" name="des" >
 				</div>
 

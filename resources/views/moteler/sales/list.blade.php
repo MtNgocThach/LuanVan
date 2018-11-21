@@ -72,7 +72,7 @@
                                             @if($ser->id_mls == $room->id_mls)
                                                 <div>
                                                     <input type="text" readonly="true"
-                                                           value="@if(in_array($ser->name, array('Điện', 'Nước'))) {{ $ser->name }}@endif - {{$ser->id_mls}}">
+                                                           value="@if(!in_array($ser->name, array('Điện', 'Nước'))) {{ $ser->name }}@endif">
                                                 </div>
                                             @endif
                                         @endforeach
@@ -83,19 +83,19 @@
                                             @if($ser->id_mls == $room->id_mls)
                                                 <div>
                                                     <input type="text" id="price_{{$ser->name}}" name="price_{{ $ser->name }}{{ $room->id }}" readonly="true"
-                                                           value="@if(in_array($ser->name, array('Điện', 'Nước'))) {{$ser->price}} @endif">
+                                                           value="@if(!in_array($ser->name, array('Điện', 'Nước'))) {{$ser->price}} @endif">
                                                 </div>
                                             @endif
                                         @endforeach
                                     </td>
                                     <td>{{ $room->debt }}</td>
-                                    <td>
-                                        <div>Thanh toán</div>
-                                    </td>
-                                    <td>
-                                        <div><input type="text" id="pay" name="pay{{ $room->id }}" placeholder="Sô tiền trả"></div>
-                                        <div><input type="text" id="debt" name="debt{{ $room->id }}" value="" hidden="hidden"></div>
-                                    </td>
+                                    {{--<td>--}}
+                                        {{--<div>Thanh toán</div>--}}
+                                    {{--</td>--}}
+                                    {{--<td>--}}
+                                        {{--<div><input type="text" id="pay" name="pay{{ $room->id }}" placeholder="Sô tiền trả"></div>--}}
+                                        {{--<div><input type="text" id="debt" name="debt{{ $room->id }}" value="" hidden="hidden"></div>--}}
+                                    {{--</td>--}}
                                     <td class="act">
                                         <button class="btn btn-info">
                                             <i class="fa fa-save" aria-hidden="true"> <b>Lưu</b></i>

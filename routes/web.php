@@ -40,12 +40,13 @@ Route::get('logout','userCtrl@getLogout');
 Route::get('login','userCtrl@getLoginMotelers');
 Route::post('login','userCtrl@postLoginMotelers');
 
-
+//admin
 Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 
     Route::group(['prefix'=>'account'],function(){
 
         Route::get('list','adAccCtrl@getList');
+        Route::get('listMotels','adAccCtrl@getListMotels');
 
         Route::get('del/{id}','adAccCtrl@getDel');
         
@@ -54,6 +55,9 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 
         Route::get('add','adAccCtrl@getAdd');
         Route::post('add','adAccCtrl@postAdd');
+
+        Route::get('editMotel/{id}','adAccCtrl@getEditMotel');
+        Route::post('editMotel/{id}','adAccCtrl@postEditMotel');
     }); 
 });
 
@@ -73,6 +77,10 @@ Route::group(['prefix'=>'moteler','middleware'=>'motelerLogin'],function(){
     Route::group(['prefix'=>'sales'],function(){
 
         Route::get('list','salesCtrl@getList');
+
+        Route::get('listBills','salesCtrl@getListBills');
+        Route::get('updateBill','salesCtrl@updateBill');
+        Route::post('updateBill','salesCtrl@updateBill');
 
 //        Route::get('del/{id}','catalogue_roomCtrl@getDel');
 //

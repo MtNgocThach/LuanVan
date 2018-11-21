@@ -6,26 +6,6 @@
               <span class="nav-link-text">Tài Khoản</span>
             </a>
           </li>
-
-          {{-- <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-            <a class="nav-link" href="moteler/motels/list">
-              <i class="fa fa-fw fa-dashboard"></i>
-              <span class="nav-link-text">Nhà Trọ</span>
-            </a>
-          </li>
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-            <a class="nav-link" href="moteler/services/list">
-              <i class="fa fa-fw fa-dashboard"></i>
-              <span class="nav-link-text">Dịch vụ</span>
-            </a>
-          </li> --}}
-          {{-- admin profile --}}
-          {{-- <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-            <a class="nav-link" href="admin/profile/info">
-              <i class="fa fa-fw fa-dashboard"></i>
-              <span class="nav-link-text">Thông tin</span>
-            </a>
-          </li> --}}
           
         </ul>
         <ul class="navbar-nav sidenav-toggler">

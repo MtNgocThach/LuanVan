@@ -4,39 +4,34 @@
 <div class="row">
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-
+			
 			@if(session('mess'))
 			<div class="alert alert-success">
 				{{ session('mess') }}
 			</div>
 			@endif
 
-			<form class="contact100-form validate-form" action="moteler/services/edit/{{ $ser->id }}" method="POST">
+			<form class="contact100-form validate-form " action="admin/account/editMotel/{{ $mtl->id }}" method="POST">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<span class="contact100-form-title">
-					Thêm Dịch Vụ
+					Cập nhật thông tin nhà trọ <br>
+					Nhà trọ <i>{{ $mtl->name }}</i>
 				</span>
 
-				<div class="wrap-input100 validate-input bg1" data-validate="Vui lòng điền tên loại dịch vụ">
-					<span class="label-input100">Tên Dịch Vụ *</span>
-					<input class="input100" type="text" value="{{ $ser->name }}" name="name" placeholder="Tên dịch vụ">
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" >
+					<span class="label-input100">Kinh độ </span>
+					<input class="input100"  value="{{ $mtl->longitude }}" type="text" name="longitude" placeholder="Vui lòng nhập kinh độ...">
+				</div>
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+					<span class="label-input100">Vĩ độ </span>
+					<input class="input100"  value="{{ $mtl->latitude }}" type="text" name="latitude" placeholder="Vui lòng nhập vĩ độ...">
 				</div>
 
-				<div class="wrap-input100 validate-input bg1 " data-validate = "Vui lòng điền giá dịch vụ">
-					<span class="label-input100">Giá *</span>
-					<input class="input100" type="" value="{{ $ser->price	 }}" name="price" placeholder="Giá ">
-				</div>
-				
-
-				<div class="wrap-input100  bg0 rs1-alert-validate">
-						<span class="label-input100">Mô tả</span>
-						<input class="input100" type="text" name="des" value="{{ $ser->description }}">
-					</div>
 
 				<div class="container-contact100-form-btn">
 					<button class="contact100-form-btn">
 						<span>
-							Sửa thông tin
+							Cập Nhật Thông Tin Nhà Trọ
 							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
 						</span>
 					</button>
@@ -112,6 +107,9 @@
   gtag('js', new Date());
 
   gtag('config', 'UA-23581568-13');
+
+  {{-- My script --}}
+
 </script>
 
 @endsection

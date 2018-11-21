@@ -17,14 +17,25 @@
 					Thêm Dịch Vụ
 				</span>
 
-				<div class="wrap-input100 validate-input bg1" data-validate="Vui lòng điền tên loại dịch vụ">
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Vui lòng điền tên loại dịch vụ">
 					<span class="label-input100">Tên Dịch Vụ *</span>
 					<input class="input100" type="text" name="name" placeholder="Tên dịch vụ">
+				</div>
+				<div class="wrap-input100 bg1 rs1-wrap-input100 rs1-wrap-input100" data-validate = "Vui lòng chọn tên phòng trọ">
+					<span class="label-input100">Phòng trọ</span>
+					<select name="mtl_id" id="" class="input100" class="validate-input" style="border-radius:5px; width:90%">
+						@foreach( $mtls as $mtl)
+						<option value="{{ $mtl->id }}">
+							{{ $mtl->name }}
+						</option>
+
+						@endforeach
+					</select>
 				</div>
 
 				<div class="wrap-input100 validate-input bg1 " data-validate = "Vui lòng điền giá dịch vụ">
 					<span class="label-input100">Giá *</span>
-					<input class="input100" type="number" name="price" placeholder="Giá ">
+					<input class="input100" type="" name="price" placeholder="Giá ">
 				</div>
 				
 

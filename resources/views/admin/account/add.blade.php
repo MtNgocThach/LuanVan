@@ -20,23 +20,23 @@
 					<input type="text" hidden="hidden" readonly="readonly" value="" name="id_mler">
 				</span>
 
-				<div class="wrap-input100  validate-input rs1-wrap-input100  bg1" >
+				<div class="wrap-input100 validate-input rs1-wrap-input100 bg1" data-validate="Vui lòng điền Họ..." >
 					<span class="label-input100">Họ </span>
-					<input class="input100"  value="" type="text" name="frist_name" placeholder="Vui lòng điền Họ của bạn...">
+					<input class="input100" value="" type="text" name="frist_name" placeholder="Vui lòng điền Họ của bạn...">
 				</div>
-				<div class="wrap-input100  validate-input rs1-wrap-input100  bg1">
-					<span class="label-input100">Họ </span>
-					<input class="input100"  value="" type="text" name="last_name" placeholder="Vui lòng điền Tên của bạn...">
+				<div class="wrap-input100  validate-input rs1-wrap-input100 bg1" data-validate="Vui lòng điền Tên...">
+					<span class="label-input100">Tên </span>
+					<input class="input100" value="" type="text" name="last_name" placeholder="Vui lòng điền Tên của bạn...">
 				</div>
 
-				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Vui lòng điền số điện thoại">
 					<span class="label-input100">Điện thoại</span>
-					<input class="input100"  value="" type="text" name="phone" placeholder="Điện thoại">
+					<input class="input100" value="" type="text" name="phone" placeholder="Điện thoại">
 				</div>
 
-				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Vui lòng điền đúng email">
 					<span class="label-input100">Hộp thư</span>
-					<input class="input100"  value="" type="text" name="email" placeholder="Hộp thư">
+					<input class="input100" value="" type="text" name="email" placeholder="Hộp thư">
 				</div>
 					
 				<div class="wrap-input100 bg1">
@@ -44,15 +44,15 @@
 					<input class="input100" type="text" value="" name="address" placeholder="Địa chỉ ">
 				</div>						
 
-				<div class="wrap-input100  bg0 rs1-alert-validate">
+				<div class="wrap-input100  bg0 rs1-alert-validate" data-validate="Vui lòng điền tài khoản">
 					<span class="label-input100">Tài Khoản</span>
 					<input class="input100"  value=""  type="text" name="user" >
 				</div>
-				<div class="wrap-input100  bg0 rs1-alert-validate">
+				<div class="wrap-input100  bg0 rs1-alert-validate" data-validate="Vui lòng điền mật khẩu">
 					<span class="label-input100">Mật khẩu</span>
 					<input class="input100"  type="password" name="pass" id="pass">
 				</div>
-				<div class="wrap-input100 validate-input  bg0 rs1-alert-validate">
+				<div class="wrap-input100   bg0 rs1-alert-validate" data-validate="Vui lòng nhập lại mật khẩu">
 					<span class="label-input100">Nhập lại mật khẩu</span>
 					<input class="input100"  type="password" name="confirm_pass" placeholder="Vui lòng nhập lại mật khẩu...">
 				</div>
@@ -60,7 +60,7 @@
 				<div class="container-contact100-form-btn">
 					<button class="contact100-form-btn">
 						<span>
-							Cập Nhật Thông Tin Cá Nhân
+							Thêm tài khoản mới
 							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
 						</span>
 					</button>

@@ -12,12 +12,6 @@
                 {{ session('mess') }}
             </div>
         @endif
-        <?php
-//                if (isset($a)){
-//
-//                    var_dump($a);
-//                }
-        ?>
         <div class="table-responsive">
             <form class="contact100-form validate-form" action="moteler/sales/create" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -114,7 +108,7 @@
                     @endforeach
                     </tbody>
                 </table>
-            {{--</form>--}}
+            </form>
         </div>
     </div>
 

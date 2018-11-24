@@ -127,15 +127,23 @@ Route::group(['prefix'=>'moteler','middleware'=>'motelerLogin'],function(){
         
         Route::get('list','roomsCtrl@getList');
 
-        Route::get('rent','roomsCtrl@getListRent');
-
         Route::get('del/{id}','roomsCtrl@getDel');
         
         Route::get('edit/{id}','roomsCtrl@getEdit');
         Route::post('edit/{id}','roomsCtrl@postEdit');
 
+        Route::get('rent/{id}','roomsCtrl@getListRent');
+        Route::post('rent/{id}','roomsCtrl@postRent');
+
+        Route::get('change/{id}','roomsCtrl@getChange');
+        Route::post('change/{id}','roomsCtrl@postChange');
+
         Route::get('add','roomsCtrl@getAdd');
         Route::post('add','roomsCtrl@postAdd');
+
+        // trả phòng
+        Route::get('payRoom/{id}','roomsCtrl@getPayRoom');
+        Route::post('payRoom/{id}','roomsCtrl@postPayRoom');
         
     });
     // services

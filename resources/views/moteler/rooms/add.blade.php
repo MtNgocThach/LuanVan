@@ -14,43 +14,33 @@
 			<form class="contact100-form validate-form" style="" action="moteler/rooms/add" method="POST">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<span class="contact100-form-title">
-					Thêm Phòng Trọ <br> 
-					
+					Thêm Phòng Trọ <br>
 				</span>
 
-				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Vui lòng điền số người ở...">
-					<span class="label-input100">Loại Phòng *</span>
-					{{-- <input class="input100" type="number" value="{{ $rooms->area }}" name="ares" placeholder="Diện tích "> --}}
-					<select name="id_ctl" id="" class="input100" style="border-radius:5px; width:90%">
-						@foreach($ctls as $ctl)
-						<option value="{{ $ctl->id }}">{{ $ctl->name }}</option>
-
-						@endforeach
-					</select>
-				</div>
-
-				<div class="wrap-input100 validate-input bg1" data-validate="Vui lòng điền tên phòng">
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Vui lòng điền tên phòng">
 					<span class="label-input100">Tên phòng trọ *</span>
 					<input class="input100" type="text" name="name" placeholder="Tên phòng">
 				</div>
 
-				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Vui lòng điền diện tích phòng...">
-					<span class="label-input100">Diện tích *</span>
-					<input class="input100" type="number" name="area" placeholder="Diện tích ">
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Vui lòng chọn nhà trọ">
+					<span class="label-input100">Nhà trọ - Loại phòng *</span>
+					<select name="id_ctl" id="" class="input100" style="border-radius:5px; width:90%">
+						<option value="">---Chọn nhà trọ---</option>
+						@foreach($ctls as $ctl)
+							<option value="{{ $ctl->id }}">
+								<?php foreach ($mtls as $mtl)
+									if ($mtl->id == $ctl->id_mls){
+									    echo $mtl->name;
+									}
+								?>
+								 - {{ $ctl->name }}
+							</option>
+						@endforeach
+					</select>
 				</div>
 
-				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Vui lòng chọn trạng thái phòng">
-					<span class="label-input100">Trạng Thái *</span>
-					{{-- <input class="input100" type="number" value="{{ $rooms->status }}" name="status" placeholder="Trạng Thái"> --}}
-					<select name="status" id="" class="input100" style="border-radius:5px; width:90%">
-						<option value="1">Đã Thuê</option>
-						<option value="0">Trống</option>
-					</select>
-				</div>		
-
-				<div class="wrap-input100  bg0 rs1-alert-validate">
+				<div class="wrap-input100 bg0 rs1-alert-validate ">
 					<span class="label-input100">Mô tả</span>
-					{{--  <textarea class="input100"  name="des" placeholder="Mô tả..."></textarea>  --}}
 					<input class="input100" type="text" name="des" >
 				</div>
 
@@ -133,6 +123,7 @@
   gtag('js', new Date());
 
   gtag('config', 'UA-23581568-13');
+
 </script>
 
 @endsection

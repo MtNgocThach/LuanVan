@@ -19,16 +19,22 @@
 
 				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Vui lòng điền tên loại dịch vụ">
 					<span class="label-input100">Tên Dịch Vụ *</span>
-					<input class="input100" type="text" name="name" placeholder="Tên dịch vụ">
+					<select name="name" id="name" class="input100" class="validate-input" onchange="set()" style="border-radius:5px; width:90%">
+							<option value="Điện">Điện</option>
+							<option value="Nước">Nước</option>
+							<option value="1">khác</option>
+					</select>
+					<input class="input100" type="text" placeholder="Tên dịch vụ" hidden>
+
+
 				</div>
 				<div class="wrap-input100 bg1 rs1-wrap-input100 rs1-wrap-input100" data-validate = "Vui lòng chọn tên phòng trọ">
 					<span class="label-input100">Phòng trọ</span>
 					<select name="mtl_id" id="" class="input100" class="validate-input" style="border-radius:5px; width:90%">
 						@foreach( $mtls as $mtl)
-						<option value="{{ $mtl->id }}">
-							{{ $mtl->name }}
-						</option>
-
+							<option value="{{ $mtl->id }}">
+								{{ $mtl->name }}
+							</option>
 						@endforeach
 					</select>
 				</div>
@@ -57,32 +63,42 @@
 	</div>
 </div>
 
-	<script src="moteler_asset/form/vendor/jquery/jquery-3.2.1.min.js"></script>
-	<script src="moteler_asset/form/vendor/animsition/js/animsition.min.js"></script>
-	<script src="moteler_asset/form/vendor/bootstrap/js/popper.js"></script>
-	<script src="moteler_asset/form/vendor/bootstrap/js/bootstrap.min.js"></script>
-	<script src="moteler_asset/form/vendor/select2/select2.min.js"></script>
-	<script>
+<script src="moteler_asset/form/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="moteler_asset/form/vendor/animsition/js/animsition.min.js"></script>
+<script src="moteler_asset/form/vendor/bootstrap/js/popper.js"></script>
+<script src="moteler_asset/form/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="moteler_asset/form/vendor/select2/select2.min.js"></script>
+<script>
+	$(".js-select2").each(function(){
+		$(this).select2({
+			minimumResultsForSearch: 20,
+			dropdownParent: $(this).next('.dropDownSelect2')
+		});
+
+
 		$(".js-select2").each(function(){
-			$(this).select2({
-				minimumResultsForSearch: 20,
-				dropdownParent: $(this).next('.dropDownSelect2')
+			$(this).on('select2:close', function (e){
+				if($(this).val() == "Please chooses") {
+					$('.js-show-service').slideUp();
+				}
+				else {
+					$('.js-show-service').slideUp();
+					$('.js-show-service').slideDown();
+				}
 			});
+		});
+	})
 
+    function set() {
 
-			$(".js-select2").each(function(){
-				$(this).on('select2:close', function (e){
-					if($(this).val() == "Please chooses") {
-						$('.js-show-service').slideUp();
-					}
-					else {
-						$('.js-show-service').slideUp();
-						$('.js-show-service').slideDown();
-					}
-				});
-			});
-		})
-	</script>
+        if (document.getElementById('name').value == 1) {
+            document.getElementsByTagName("INPUT")[1].setAttribute("name", "name");
+            document.getElementsByTagName("INPUT")[1].removeAttribute("hidden");
+            document.getElementsByTagName("select")[0].setAttribute("hidden", "");
+            document.getElementsByTagName("select")[0].removeAttribute("name");
+        }
+    }
+</script>
 <!--===============================================================================================-->
 	<script src="moteler_asset/form/vendor/daterangepicker/moment.min.js"></script>
 	<script src="moteler_asset/form/vendor/daterangepicker/daterangepicker.js"></script>

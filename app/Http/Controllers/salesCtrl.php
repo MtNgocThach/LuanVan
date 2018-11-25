@@ -18,31 +18,22 @@ class salesCtrl extends Controller
 {
     //
     public function getList(){
-        $rooms = rooms::where('id_mler', (Auth::user())->id_mler)->where('status', '0')->get();
+        $rooms = rooms::where('id_mler', (Auth::user())->id_mler)->where('status', '1')->get();
         $services = services::where('id_mler', (Auth::user())->id_mler)->get();
         $motels = motels::where('id_mler', (Auth::user())->id_mler)->get();
         $renters = renter::where('id_mler',(Auth::user())->id_mler)->get();
-//        var_dump($rooms);die;
-//        $test = array_merge($rooms, $services);
-        return view('moteler.sales.list',['rooms'=>$rooms, 'sers'=>$services, 'mls'=>$motels,'renters'=>$renters]);
-//        return view('moteler.sales.list',['rooms'=>$rooms, 'sers'=>$services, 'mls'=>$motels, 'test'=>$test]);
-    }
 
-    public function getListBills(){
-        $rooms = rooms::where('id_mler', (Auth::user())->id_mler)->where('status', '0')->get();
-        $services = services::where('id_mler', (Auth::user())->id_mler)->get();
-        $motels = motels::where('id_mler', (Auth::user())->id_mler)->get();
-        $renters = renter::where('id_mler',(Auth::user())->id_mler)->get();
-//        var_dump($rooms);die;
-//        $test = array_merge($rooms, $services);
-        return view('moteler.sales.listBills',['rooms'=>$rooms, 'sers'=>$services, 'mls'=>$motels,'renters'=>$renters]);
-//        return view('moteler.sales.list',['rooms'=>$rooms, 'sers'=>$services, 'mls'=>$motels, 'test'=>$test]);
-    }
+        $sales = sales::where('id_mler', (Auth::user())->id_mler)->get();
+        foreach ($sales as $sale){
+            $d = date_format(new DateTime($sale->date), 'm');
 
-    public function updateBill(Request $res){
+            $a = date('m');
+            var_dump($a);
+        }
+        die;
 
-
-        var_dump($res->name);die;
+        return view('moteler.sales.list',['rooms'=>$rooms, 'sers'=>$services,
+                                                'mls'=>$motels,'renters'=>$renters, 'sales'=>$sales]);
 
     }
 
@@ -76,7 +67,7 @@ class salesCtrl extends Controller
                 $sale->services_cost = 0;
 
                 $price = catalogue_room::where('id_mls', $room->id_mls)
-                                        ->where('id', $room->id_ctl)->value('price');
+                    ->where('id', $room->id_ctl)->value('price');
                 $sale->room_cost = $price;
                 $sale->id_mler = Auth::user()->id_mler;
                 $sale->id_mls = $i;
@@ -91,23 +82,31 @@ class salesCtrl extends Controller
 
                 $sale->sum = $sale->room_cost + $cost_elec  + $cost_water - $debt_old ;
 
-//                if($pay != 0 && $pay < $sale->sum){
-//                    $sale->debt = $sale->sum - $pay;
-//                }else{
-//                    $sale->debt = 0;
-//                }
-
-
 //                $sale->save();
             }
 
         }
-        $a = date("d/m/Y");
-        $b = new DateTime();
-        $month = date('m', $b);
-        var_dump($month); die;
+
         return redirect('moteler/sales/list')->with('mess','Lưu Hoá Đơn Thành công');
 //        $ctls = catalogue_room::all();
         return view('moteler.sales.list',['rooms'=>$rooms, 'sers'=>$services, 'mls'=>$motels,'a'=>$res->no_elec_old]);
     }
+
+
+    public function getListBills(){
+        $rooms = rooms::where('id_mler', (Auth::user())->id_mler)->where('status', '0')->get();
+        $services = services::where('id_mler', (Auth::user())->id_mler)->get();
+        $motels = motels::where('id_mler', (Auth::user())->id_mler)->get();
+        $renters = renter::where('id_mler',(Auth::user())->id_mler)->get();
+
+        return view('moteler.sales.listBills',['rooms'=>$rooms, 'sers'=>$services, 'mls'=>$motels,'renters'=>$renters]);
+    }
+
+    public function updateBill(Request $res){
+
+
+        var_dump($res->name);die;
+
+    }
+
 }

@@ -15,7 +15,7 @@ class servicesCtrl extends Controller
     public function getList(){
         $mtls = motels::where('id_mler',(Auth::user())->id_mler)->get();
         $sers = services::where('id_mler',(Auth::user())->id_mler)->get();
-        // $sers = services::all();
+
         return view('moteler.services.list',['sers'=>$sers,'mtls'=>$mtls]);
     }
 

@@ -29,22 +29,20 @@
                         </tr>
                     </thead>
                     <tbody>
+
                     {{--one row is bill of one room--}}
                     @foreach($mls as $motel)
                         @foreach($rooms as $room)
-<!--                            --><?php //$i = $room->name; ?>
                             @if($motel->id == $room->id_mls)
                                 <tr>
-                                    @foreach( $renters as $renter)
                                         <td id="room_name">
                                             <div>{{$motel->name}} - {{ $room->name }}</div>
-                                            @if($room->id == $renter->id_room)
-                                                <div>{{ $renter->last_name }}</div>
-                                            @endif
+                                            @foreach( $renters as $renter)
+                                                @if($room->id == $renter->id_room)
+                                                    <div>{{ $renter->last_name }}</div>
+                                                @endif
+                                            @endforeach
                                         </td>
-
-                                        {{--@endif--}}
-                                    @endforeach
                                     <td style="text-align: left">
                                         <div>Cũ</div>
                                         <div>Mới</div>
@@ -71,7 +69,6 @@
                                             @endif
                                         @endforeach
                                     </td>
-
                                     <td>
                                         @foreach($sers as $ser)
                                             @if($ser->id_mls == $room->id_mls)
@@ -83,28 +80,14 @@
                                         @endforeach
                                     </td>
                                     <td>{{ $room->debt }}</td>
-                                    {{--<td>--}}
-                                        {{--<div>Thanh toán</div>--}}
-                                    {{--</td>--}}
-                                    {{--<td>--}}
-                                        {{--<div><input type="text" id="pay" name="pay{{ $room->id }}" placeholder="Sô tiền trả"></div>--}}
-                                        {{--<div><input type="text" id="debt" name="debt{{ $room->id }}" value="" hidden="hidden"></div>--}}
-                                    {{--</td>--}}
                                     <td class="act">
-                                        <button class="btn btn-info">
-                                            <i class="fa fa-save" aria-hidden="true"> <b>Lưu</b></i>
+                                        <button class="contact100-form-btn">
+                                            <i class="fa fa-upload"> Lưu</i>
                                         </button>
-                                        {{--<button class="contact100-form-btn">--}}
-                                            {{--<span>--}}
-                                                {{--Lưu--}}
-                                                {{--<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>--}}
-                                            {{--</span>--}}
-                                        {{--</button>--}}
                                     </td>
                                 </tr>
-                                {{--</from>--}}
                             @endif
-                    @endforeach
+                        @endforeach
                     @endforeach
                     </tbody>
                 </table>

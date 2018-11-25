@@ -34,14 +34,18 @@
             <tbody>
             <?php $index =1 ?>
             @foreach ($sers as $ser)
-                @foreach($mtls as $mtl)
+
             <tr>
                 <td>{{ $index++ }}</td>
                 <td>{{ $ser->name }}</td>
                 <td>{{ $ser->price }}</td>
-                @if( $mtl->id == $ser->id_mls )
-                    <td>{{ $mtl->name }}</td>
-                @endif
+                <td>
+                    @foreach($mtls as $mtl)
+                        @if( $mtl->id == $ser->id_mls )
+                            {{ $mtl->name }}
+                        @endif
+                    @endforeach
+                </td>
                 <td>{{ $ser->description }}</td>
                 <td class="act">
                     <button class="btn btn-primary" type="button">
@@ -59,7 +63,6 @@
                 </td>
             </tr>
 
-                @endforeach
             @endforeach
             </tbody>
         </table>

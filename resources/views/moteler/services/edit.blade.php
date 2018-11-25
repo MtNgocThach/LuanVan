@@ -24,7 +24,7 @@
 
 				<div class="wrap-input100 validate-input bg1 " data-validate = "Vui lòng điền giá dịch vụ">
 					<span class="label-input100">Giá *</span>
-					<input class="input100" type="number" value="{{ $ser->price	 }}" name="price" placeholder="Giá ">
+					<input class="input100" type="" value="{{ $ser->price	 }}" name="price" placeholder="Giá ">
 				</div>
 				
 

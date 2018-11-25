@@ -26,6 +26,7 @@
                 <th>STT</th>
                 <th>Dịch vụ</th>
                 <th>Giá</th>
+                <th>Nhà trọ</th>
                 <th>Mô tả</th>
                 <th colspan="2"></th>
             </tr>
@@ -33,10 +34,18 @@
             <tbody>
             <?php $index =1 ?>
             @foreach ($sers as $ser)
+
             <tr>
                 <td>{{ $index++ }}</td>
                 <td>{{ $ser->name }}</td>
                 <td>{{ $ser->price }}</td>
+                <td>
+                    @foreach($mtls as $mtl)
+                        @if( $mtl->id == $ser->id_mls )
+                            {{ $mtl->name }}
+                        @endif
+                    @endforeach
+                </td>
                 <td>{{ $ser->description }}</td>
                 <td class="act">
                     <button class="btn btn-primary" type="button">
@@ -54,7 +63,6 @@
                 </td>
             </tr>
 
-                
             @endforeach
             </tbody>
         </table>

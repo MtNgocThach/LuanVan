@@ -4,50 +4,34 @@
 <div class="row">
 	<div class="container-contact100">
 		<div class="wrap-contact100">
+			
+			@if(session('mess'))
+			<div class="alert alert-success">
+				{{ session('mess') }}
+			</div>
+			@endif
 
-				@if(session('mess'))
-				<div class="alert alert-success">
-					{{ session('mess') }}
-				</div>
-				@endif
-
-			<form class="contact100-form validate-form" style="" action="moteler/rooms/add" method="POST">
+			<form class="contact100-form validate-form " action="admin/account/editMotel/{{ $mtl->id }}" method="POST">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<span class="contact100-form-title">
-					Thêm Phòng Trọ <br>
+					Cập nhật thông tin nhà trọ <br>
+					Nhà trọ <i>{{ $mtl->name }}</i>
 				</span>
 
-				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Vui lòng điền tên phòng">
-					<span class="label-input100">Tên phòng trọ *</span>
-					<input class="input100" type="text" name="name" placeholder="Tên phòng">
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" >
+					<span class="label-input100">Kinh độ </span>
+					<input class="input100"  value="{{ $mtl->longitude }}" type="text" name="longitude" placeholder="Vui lòng nhập kinh độ...">
+				</div>
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+					<span class="label-input100">Vĩ độ </span>
+					<input class="input100"  value="{{ $mtl->latitude }}" type="text" name="latitude" placeholder="Vui lòng nhập vĩ độ...">
 				</div>
 
-				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Vui lòng chọn nhà trọ">
-					<span class="label-input100">Nhà trọ - Loại phòng *</span>
-					<select name="id_ctl" id="" class="input100" style="border-radius:5px; width:90%">
-						<option value="">---Chọn nhà trọ---</option>
-						@foreach($ctls as $ctl)
-							<option value="{{ $ctl->id }}">
-								<?php foreach ($mtls as $mtl)
-									if ($mtl->id == $ctl->id_mls){
-									    echo $mtl->name;
-									}
-								?>
-								 - {{ $ctl->name }}
-							</option>
-						@endforeach
-					</select>
-				</div>
-
-				<div class="wrap-input100 bg0 rs1-alert-validate ">
-					<span class="label-input100">Mô tả</span>
-					<input class="input100" type="text" name="des" >
-				</div>
 
 				<div class="container-contact100-form-btn">
 					<button class="contact100-form-btn">
 						<span>
-							Thêm phòng trọ mới
+							Cập Nhật Thông Tin Nhà Trọ
 							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
 						</span>
 					</button>
@@ -123,6 +107,8 @@
   gtag('js', new Date());
 
   gtag('config', 'UA-23581568-13');
+
+  {{-- My script --}}
 
 </script>
 

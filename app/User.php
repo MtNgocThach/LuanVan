@@ -19,7 +19,7 @@ class User extends Authenticatable
     ];
     protected $table = "users";
     public $timestamps = false;
-    // public $remember_token = false;
+    public $remember_token = false;
 
     /**
      * The attributes that should be hidden for arrays.

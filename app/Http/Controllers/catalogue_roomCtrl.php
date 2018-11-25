@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 use App\catalogue_room;
+use App\motels;
+use App\catalogue;
 // use Illuminate\Support\Facades\Request;
 
 class catalogue_roomCtrl extends Controller
 {
     //Danh Sách
     public function getList(){
-        $ctls = catalogue_room::all();
+        $ctls = catalogue_room::where('id_mler', (Auth::user())->id_mler)->get();
         return view('moteler.catalogue_room.list',['ctls'=>$ctls]);
     }
 
@@ -34,7 +38,9 @@ class catalogue_roomCtrl extends Controller
         $ctl->name = $res->name;
         $ctl->numpers = $res->numpers;
         $ctl->price = $res->price;
-        $ctl->description = $res->des;
+        if(!empty($res->des)){
+            $ctl->description = $res->des;
+        }
 
         $ctl->save();
 
@@ -44,19 +50,26 @@ class catalogue_roomCtrl extends Controller
 
     //Thêm
     public function getAdd(){
+
+        $mtls = motels::where('id_mler',(Auth::user())->id_mler)->get();
+        $ctls = catalogue::all();
         
-        return view('moteler/catalogue_room/add');
+        return view('moteler/catalogue_room/add',['mtls'=>$mtls,'ctls'=>$ctls]);
     }
     public function postAdd(Request $res){
         // echo $res->des;
-        
+        $nameCtl = catalogue::where('id',$res->id_ctl)->value('name');
         $ctl = new catalogue_room;
-        $ctl->name = $res->name;
+
+        $ctl->name = $nameCtl;
         $ctl->numpers = $res->numpers;
         $ctl->price = $res->price;
         $ctl->description = $res->des;
+        $ctl->area = $res->area;
 
-        $ctl->id_mls = 2;
+        $ctl->id_ctlg = $res->id_ctl;
+        $ctl->id_mls = $res->id_mtl;
+        $ctl->id_mler = (Auth::user())->id_mler;
         // echo $ctl->description;
 
         $ctl->save();

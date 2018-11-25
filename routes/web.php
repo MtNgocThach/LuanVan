@@ -40,12 +40,13 @@ Route::get('logout','userCtrl@getLogout');
 Route::get('login','userCtrl@getLoginMotelers');
 Route::post('login','userCtrl@postLoginMotelers');
 
-
+//admin
 Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 
     Route::group(['prefix'=>'account'],function(){
 
         Route::get('list','adAccCtrl@getList');
+        Route::get('listMotels','adAccCtrl@getListMotels');
 
         Route::get('del/{id}','adAccCtrl@getDel');
         
@@ -54,6 +55,9 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 
         Route::get('add','adAccCtrl@getAdd');
         Route::post('add','adAccCtrl@postAdd');
+
+        Route::get('editMotel/{id}','adAccCtrl@getEditMotel');
+        Route::post('editMotel/{id}','adAccCtrl@postEditMotel');
     }); 
 });
 
@@ -67,6 +71,26 @@ Route::group(['prefix'=>'moteler','middleware'=>'motelerLogin'],function(){
         Route::get('edit/{id}','profileCtrl@getEdit');
         Route::post('edit/{id}','profileCtrl@postEdit');
         
+    });
+
+    // sales
+    Route::group(['prefix'=>'sales'],function(){
+
+        Route::get('list','salesCtrl@getList');
+
+        Route::get('listBills','salesCtrl@getListBills');
+        Route::get('updateBill','salesCtrl@updateBill');
+        Route::post('updateBill','salesCtrl@updateBill');
+
+//        Route::get('del/{id}','catalogue_roomCtrl@getDel');
+//
+//        Route::get('edit/{id}','catalogue_roomCtrl@getEdit');
+        Route::post('create','salesCtrl@createSales');
+//        Route::post('edit/{id}','catalogue_roomCtrl@postEdit');
+//
+//        Route::get('add','catalogue_roomCtrl@getAdd');
+//        Route::post('add','catalogue_roomCtrl@postAdd');
+
     });
     
     // catalogue_room
@@ -102,14 +126,24 @@ Route::group(['prefix'=>'moteler','middleware'=>'motelerLogin'],function(){
     Route::group(['prefix'=>'rooms'],function(){
         
         Route::get('list','roomsCtrl@getList');
-        
+
         Route::get('del/{id}','roomsCtrl@getDel');
         
         Route::get('edit/{id}','roomsCtrl@getEdit');
         Route::post('edit/{id}','roomsCtrl@postEdit');
 
+        Route::get('rent/{id}','roomsCtrl@getListRent');
+        Route::post('rent/{id}','roomsCtrl@postRent');
+
+        Route::get('change/{id}','roomsCtrl@getChange');
+        Route::post('change/{id}','roomsCtrl@postChange');
+
         Route::get('add','roomsCtrl@getAdd');
         Route::post('add','roomsCtrl@postAdd');
+
+        // trả phòng
+        Route::get('payRoom/{id}','roomsCtrl@getPayRoom');
+        Route::post('payRoom/{id}','roomsCtrl@postPayRoom');
         
     });
     // services

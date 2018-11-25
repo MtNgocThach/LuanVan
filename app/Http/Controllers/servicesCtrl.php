@@ -8,14 +8,15 @@ use Illuminate\Support\Facades\Auth;
 use App\services;
 use App\motels;
 
+
 class servicesCtrl extends Controller
 {
     //Danh Sách
     public function getList(){
-        // $mtls = motels::where('id_mler',(Auth::user())->id_mler)->get();
+        $mtls = motels::where('id_mler',(Auth::user())->id_mler)->get();
         $sers = services::where('id_mler',(Auth::user())->id_mler)->get();
-        // $sers = services::all();
-        return view('moteler.services.list',['sers'=>$sers]);
+
+        return view('moteler.services.list',['sers'=>$sers,'mtls'=>$mtls]);
     }
 
     //Xóa
@@ -29,8 +30,9 @@ class servicesCtrl extends Controller
     //Thêm
     public function getAdd(){
         // $sers = services::where('id_mls',1)->get(); //đk chủ trọ
-        
-        return view('moteler/services/add');
+        $mtls = motels::where('id_mler',(Auth::user())->id_mler)->get();
+
+        return view('moteler/services/add',['mtls'=>$mtls]);
     }
     public function postAdd(Request $res){
         
@@ -39,7 +41,8 @@ class servicesCtrl extends Controller
         $rooms->price = $res->price;
         $rooms->description = $res->des;
 
-        $rooms->id_mls = 1;
+        $rooms->id_mls = $res->mtl_id;
+        $rooms->id_mler = (Auth::user())->id_mler;
 
         $rooms->save();
 
@@ -48,8 +51,9 @@ class servicesCtrl extends Controller
 
     //Sửa
     public function getEdit($id){
-        $ser = services::find($id);
-        return view('moteler.services.edit',['ser'=>$ser]);
+        $ser  = services::find($id);
+        $mtls = motels::where('id_mler', (Auth::user())->id_mler)->get();
+        return view('moteler.services.edit',['ser'=>$ser, 'mtls'=>$mtls]);
     }
     public function postEdit(Request $res, $id){
         $sers = services::find($id);
@@ -57,8 +61,6 @@ class servicesCtrl extends Controller
         $sers->name = $res->name;
         $sers->price = $res->price;
         $sers->description = $res->des;
-
-        $sers->id_mls = 1;
 
         $sers->save();
 

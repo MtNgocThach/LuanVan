@@ -1,0 +1,4 @@
+tbody tr td:nth-child(3) div input{
+    text-align: center;
+    width: 100%;
+}

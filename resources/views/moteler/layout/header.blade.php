@@ -4,4 +4,4 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     @include('moteler.layout.menu')
-  </nav>
+</nav>

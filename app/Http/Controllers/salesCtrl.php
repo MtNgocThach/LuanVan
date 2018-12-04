@@ -24,13 +24,13 @@ class salesCtrl extends Controller
         $renters = renter::where('id_mler',(Auth::user())->id_mler)->get();
 
         $sales = sales::where('id_mler', (Auth::user())->id_mler)->get();
-        foreach ($sales as $sale){
-            $d = date_format(new DateTime($sale->date), 'm');
-
-            $a = date('m');
-            var_dump($a);
-        }
-        die;
+//        foreach ($sales as $sale){
+//            $d = date_format(new DateTime($sale->date), 'm');
+////
+////            $a = date('m');
+//            var_dump($d);
+//        }
+//        die;
 
         return view('moteler.sales.list',['rooms'=>$rooms, 'sers'=>$services,
                                                 'mls'=>$motels,'renters'=>$renters, 'sales'=>$sales]);
@@ -45,13 +45,19 @@ class salesCtrl extends Controller
 
         // set data sales for ever room
         foreach ($rooms as $room){
-            $sale = new sales();
             $i = $room->id;
             if ($res->input('no_elec_new'.$i) == '' && $res->input('no_water_new'.$i) == ''){
                 continue;
             } else{
-                $sale->no_elec_old = $res->input('no_elec_old'.$i);
-                $sale->no_elec_new = $res->input('no_elec_new'.$i);
+
+                $sale = new sales();
+
+                $room->no_water = $res->input('no_water_new'.$i);
+                $room->no_elec = $res->input('no_elec_new'.$i);
+                $room->status = 2;
+
+                $sale->no_elec_old  = $res->input('no_elec_old'.$i);
+                $sale->no_elec_new  = $res->input('no_elec_new'.$i);
                 $sale->no_water_old = $res->input('no_water_old'.$i);
                 $sale->no_water_new = $res->input('no_water_new'.$i);
 
@@ -65,24 +71,30 @@ class salesCtrl extends Controller
                 }
 
                 $sale->services_cost = 0;
-
                 $price = catalogue_room::where('id_mls', $room->id_mls)
-                    ->where('id', $room->id_ctl)->value('price');
+                                        ->where('id', $room->id_ctl)->value('price');
                 $sale->room_cost = $price;
                 $sale->id_mler = Auth::user()->id_mler;
-                $sale->id_mls = $i;
+                $sale->id_mls = $room->id_mls;
+                $sale->id_room = $i;
                 $sale->status = 1;
-                $sale->date = getdate();
+                $sale->date = date('Y/d/m');
 
                 $debt_old = $res->input('debt'.$i);
-                $pay = $res->input('pay'.$i);
-
                 $cost_elec = ($sale->no_elec_new - $sale->no_elec_old) * $sale->price_elec;
                 $cost_water = ($sale->no_water_new - $sale->no_water_old) * $sale->price_water;
 
-                $sale->sum = $sale->room_cost + $cost_elec  + $cost_water - $debt_old ;
+                if ($room->deposit < $room->pay_deposit){
+                    $sale->sum = $sale->room_cost + $cost_elec  + $cost_water + $debt_old - $room->deposit ;
+                    $room->deposit = 0;
+                }else if ($room->deposit >= $room->pay_deposit){
+                    $sale->sum = $sale->room_cost + $cost_elec  + $cost_water + $debt_old - $room->pay_deposit;
+                    $room->deposit = $room->deposit - $room->pay_deposit;
+                }
+                $room->debt = 0;
 
-//                $sale->save();
+                $sale->save();
+                $room->save();
             }
 
         }
@@ -94,12 +106,14 @@ class salesCtrl extends Controller
 
 
     public function getListBills(){
-        $rooms = rooms::where('id_mler', (Auth::user())->id_mler)->where('status', '0')->get();
+        $rooms = rooms::where('id_mler', (Auth::user())->id_mler)->where('status', '2')->get();
         $services = services::where('id_mler', (Auth::user())->id_mler)->get();
         $motels = motels::where('id_mler', (Auth::user())->id_mler)->get();
         $renters = renter::where('id_mler',(Auth::user())->id_mler)->get();
 
-        return view('moteler.sales.listBills',['rooms'=>$rooms, 'sers'=>$services, 'mls'=>$motels,'renters'=>$renters]);
+        $sales = sales::where('id_mler', (Auth::user())->id_mler)->where('status', '1')->get();
+
+        return view('moteler.sales.listBills',['rooms'=>$rooms, 'sers'=>$services, 'mls'=>$motels,'renters'=>$renters, 'sales'=>$sales]);
     }
 
     public function updateBill(Request $res){

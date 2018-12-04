@@ -111,15 +111,38 @@ class salesCtrl extends Controller
         $motels = motels::where('id_mler', (Auth::user())->id_mler)->get();
         $renters = renter::where('id_mler',(Auth::user())->id_mler)->get();
 
-        $sales = sales::where('id_mler', (Auth::user())->id_mler)->where('status', '1')->get();
+        $sales = sales::where('id_mler', (Auth::user())->id_mler)->where('status','<>' ,'0')->get();
 
         return view('moteler.sales.listBills',['rooms'=>$rooms, 'sers'=>$services, 'mls'=>$motels,'renters'=>$renters, 'sales'=>$sales]);
     }
 
-    public function updateBill(Request $res){
+    public function postupdateBill(Request $res){
+
+        $sale = sales::find($res->id);
+        $room = rooms::find($sale->id_room);
+
+        $sale->sum = $sale->sum - $res->pay;
+        $sale->date_pay = date('Y/d/m');
+
+        if ($res->pay == $sale->sum){
+            $room->debt = 0;
+            $room->status = 1;
+            $sale->status = 1;
+            $sale->save();
+            $room->save();
+            return redirect('moteler/sales/list')->with('mess','Đã thanh toán hoá đơn');
+        }else{
+
+            $room->debt = $sale->sum - $res->pay;
+            $sale->status = 2;
+            $room->status = 1;
+            $sale->save();
+            $room->save();
+            return redirect('moteler/sales/list')->with('mess','Đã thanh toán một phần hoá đơn');
+        }
 
 
-        var_dump($res->name);die;
+
 
     }
 

@@ -3,7 +3,7 @@
 @section('content')
 <div class="card mb-3">
 <div class="card-header">
-    <i class="fa fa-table"></i> Trả Phòng {{ $room->name }}
+    <i class="fa fa-table"></i> Đổi phòng {{ $room->name }}
 </div>
 <div class="card-body">
 

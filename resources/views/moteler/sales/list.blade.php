@@ -103,6 +103,7 @@
     tbody tr td:nth-child(3) div input, td:nth-child(5) div input, td:nth-child(7) div input, td:nth-child(10) div input{
         text-align: center;
         width: 100%;
+        color: red;
     }
     tbody td:nth-child(9), tbody td:nth-child(10) {
         text-align: left;

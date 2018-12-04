@@ -32,7 +32,7 @@
 
                             if ($m_sale === $m_now){
                         ?>
-                        <tr>
+                        <tr id="{{ $sale->id }}">
                             <td>
                                 @foreach($rooms as $room)
                                     @if($room->id == $sale->id_room)
@@ -50,16 +50,24 @@
                             </td>
                             <td>{{ date_format(new DateTime($sale->date), 'd/m/Y') }}</td>
                             <td>{{ $sale->sum }}</td>
-                            <td>
-                                <button class="contact100-form-btn" type="button" data-toggle="modal" onclick="detail({{ $sale->id_room }})" data-target="#detaiBilllModal">
-                                    <i class="fa fa-upload"> Chi Tiết</i>
-                                </button>
-                            </td>
-                            <td>
-                                <button class="contact100-form-btn" type="button" data-toggle="modal" data-target="#payModal"  >
-                                        <i class="fa fa-upload"> Thanh Toán</i>
-                                </button>
-                            </td>
+                            <?php if ($sale->status == 2){ ?>
+                                <td>
+                                    <button class="contact100-form-btn" type="button" data-toggle="modal" onclick="detail({{ $sale->id_room }})" data-target="#detaiBilllModal">
+                                        <i class="fa fa-upload"> Thanh toán nợ</i>
+                                    </button>
+                                </td>
+                            <?php }else{ ?>
+                                <td>
+                                    <button class="contact100-form-btn" type="button" data-toggle="modal" onclick="detail({{ $sale->id_room }})" data-target="#detaiBilllModal">
+                                        <i class="fa fa-upload"> Chi Tiết</i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class="contact100-form-btn" type="button" data-toggle="modal" onclick="pay({{ $sale->id }})" data-target="#payModal"  >
+                                            <i class="fa fa-upload"> Thanh Toán</i>
+                                    </button>
+                                </td>
+                            <?php } ?>
                         </tr>
                         <?php } ?>
                     @endforeach
@@ -148,7 +156,8 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="wrap-input100 validate-input bg1" data-validate="Vui lòng nhập số tiền...">
                         <span class="label-input100">Số tiền thanh toán</span>
-                        <input class="input100" type="text" value="" name="name" placeholder="Số tiền...">
+                        <input class="input100" type="text" name="pay" placeholder="Số tiền...">
+                        <input class="input100" type="text" id="id" name="id" placeholder="id_room" hidden>
                     </div>
                     <div class="container-contact100-form-btn">
                         <button class="contact100-form-btn">
@@ -166,6 +175,17 @@
 </div>
 
 <script type="text/javascript">
+
+    var dataCon = {!! $sales !!};
+    dataCon.forEach(function (element) {
+        if (element['status' == 2]){
+            document.getElementById(element['id']).setAttribute("style", 'color: red');
+        }
+    }) ;
+
+    function pay($id) {
+        document.getElementById("id").setAttribute("value", $id);
+    }
 
     function detail($id) {
         var data_sales = {!! $sales !!};

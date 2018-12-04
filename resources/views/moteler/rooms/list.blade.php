@@ -22,7 +22,7 @@
                 <th>Phòng</th>
                 <th>Loại phòng</th>
                 <th>Trạng thái</th>
-                <th>Mô tả</th>
+                <th></th>
                 <th colspan="2"></th>
             </tr>
             </thead>

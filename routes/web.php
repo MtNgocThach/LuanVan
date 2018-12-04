@@ -80,7 +80,7 @@ Route::group(['prefix'=>'moteler','middleware'=>'motelerLogin'],function(){
 
         Route::get('listBills','salesCtrl@getListBills');
         Route::get('updateBill','salesCtrl@updateBill');
-        Route::post('updateBill','salesCtrl@updateBill');
+        Route::post('updateBill','salesCtrl@postupdateBill');
 
 //        Route::get('del/{id}','catalogue_roomCtrl@getDel');
 //

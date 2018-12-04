@@ -169,9 +169,12 @@ class roomsCtrl extends Controller
     //change
     public function getChange($id){
         $room = rooms::find($id);
+        $price = catalogue_room::where('id_mler',(Auth::user())->id_mler)
+                                ->where('id', $room->id_ctl)->value('price');
         $allroom = rooms::where('id_mler', (Auth::user())->id_mler)->get();
+        $price_rooms = catalogue_room::where('id_mler',(Auth::user())->id_mler)->get();
 
-        return view('moteler/rooms/change',['room'=>$room, ]);
+        return view('moteler/rooms/change',['room'=>$room, 'price'=>$price, 'rooms'=>$allroom, 'price_rooms'=>$price_rooms]);
     }
 
     public function postChange(Request $res, $id){

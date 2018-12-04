@@ -52,7 +52,7 @@
                             <td>{{ $sale->sum }}</td>
                             <?php if ($sale->status == 2){ ?>
                                 <td>
-                                    <button class="contact100-form-btn" type="button" data-toggle="modal" onclick="detail({{ $sale->id_room }})" data-target="#detaiBilllModal">
+                                    <button class="contact100-form-btn" type="button" data-toggle="modal" onclick="" data-target="#payDebtModal">
                                         <i class="fa fa-upload"> Thanh toán nợ</i>
                                     </button>
                                 </td>
@@ -153,6 +153,38 @@
             </div>
             <div class="modal-body">
                 <form class="contact100-form validate-form" style="" action="moteler/sales/updateBill" method="POST">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <div class="wrap-input100 validate-input bg1" data-validate="Vui lòng nhập số tiền...">
+                        <span class="label-input100">Số tiền thanh toán</span>
+                        <input class="input100" type="text" name="pay" placeholder="Số tiền...">
+                        <input class="input100" type="text" id="id" name="id" placeholder="id_room" hidden>
+                    </div>
+                    <div class="container-contact100-form-btn">
+                        <button class="contact100-form-btn">
+                    <span>
+                        Thanh Toán
+                        <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+                    </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="payDebtModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thanh toán</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="contact100-form validate-form" style="" action="moteler/sales/payDebt" method="POST">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="wrap-input100 validate-input bg1" data-validate="Vui lòng nhập số tiền...">
                         <span class="label-input100">Số tiền thanh toán</span>

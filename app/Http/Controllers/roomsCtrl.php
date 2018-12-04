@@ -179,7 +179,47 @@ class roomsCtrl extends Controller
 
     public function postChange(Request $res, $id){
 
-        var_dump('I am here');die;
+        $rm = rooms::find($id);
+        $room_change = rooms::find($res->id_room_change);
+        $id_renter = renter::where('id_mler',(Auth::user())->id_mler)
+                           ->where('id_room', $rm->id)->value('id');
+        $services = services::where('id_mler', (Auth::user())->id_mler)->get();
+        $renter = renter::find($id_renter);
+
+
+        $renter->id_room = $id;
+        $renter->date_start = date('Y/m/d');
+        $renter->note = $renter->note . '- Đổi từ phòng ' . $rm->name . ' sang phòng ' . $room_change->name;
+
+        foreach ($services as $service) {
+            if ($service->id_mls == $rm->id_mls && $service->name == 'Điện'){
+                $price_elec = $service->price;
+            }
+            if ($service->id_mls == $rm->id_mls && $service->name == 'Nước'){
+                $price_water = $service->price;
+            }
+        }
+        $no_elec  = $res->no_elec_new - $res->no_elec_old;
+        $no_water = $res->no_water_new - $res->no_water_old;
+
+        $debt = $res->debt + $res->cost_date + ($no_elec*$price_elec) + ($no_water*$price_water);
+
+        $room_change->debt = $debt;
+        $room_change->deposit = $rm->deposit;
+        $room_change->pay_deposit = $rm->pay_deposit;
+        $room_change->date_change = date('Y/m/d');
+
+        $rm->debt = 0;
+        $rm->deposit = 0;
+        $rm->pay_deposit = 0;
+
+        $renter->save();
+        $rm->save();
+        $room_change->save();
+
+        return redirect('moteler/rooms/list')->with('mess','Đổi phòng thành công');
+
+        var_dump($room_change->date_change);die;
         return true;
     }
 }

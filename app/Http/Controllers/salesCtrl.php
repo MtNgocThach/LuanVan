@@ -62,7 +62,7 @@ class salesCtrl extends Controller
                 $sale->no_water_new = $res->input('no_water_new'.$i);
 
                 foreach ($services as $service) {
-                    if ($service->id_mls == $room->id && $service->name == 'Điện'){
+                    if ($service->id_mls == $room->id_mls && $service->name == 'Điện'){
                         $sale->price_elect = $service->price;
                     }
                     if ($service->id_mls == $room->id && $service->name == 'Nước'){
@@ -73,7 +73,16 @@ class salesCtrl extends Controller
                 $sale->services_cost = 0;
                 $price = catalogue_room::where('id_mls', $room->id_mls)
                                         ->where('id', $room->id_ctl)->value('price');
-                $sale->room_cost = $price;
+                $change = date_format(new DateTime($room->date_change), 'm');
+                $m_now = date('m');
+                if ($change == $m_now){
+                    $d_change = date_format(new DateTime($room->date_change), 'd');
+                    $d_now = date('d');
+
+                    $sale->room_cost = ($d_now - $d_change)*$price;
+                }else{
+                    $sale->room_cost = $price;
+                }
                 $sale->id_mler = Auth::user()->id_mler;
                 $sale->id_mls = $room->id_mls;
                 $sale->id_room = $i;
@@ -140,10 +149,10 @@ class salesCtrl extends Controller
             $room->save();
             return redirect('moteler/sales/list')->with('mess','Đã thanh toán một phần hoá đơn');
         }
+    }
 
-
-
-
+    public function postPayDebt(Request $res){
+        var_dump(111);die;
     }
 
 }

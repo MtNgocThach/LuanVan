@@ -35,14 +35,14 @@
                         @foreach($rooms as $room)
                             @if($motel->id == $room->id_mls)
                                 <tr>
-                                        <td id="room_name">
-                                            <div>{{$motel->name}} - {{ $room->name }}</div>
-                                            @foreach( $renters as $renter)
-                                                @if($room->id == $renter->id_room)
-                                                    <div>{{ $renter->last_name }}</div>
-                                                @endif
-                                            @endforeach
-                                        </td>
+                                    <td id="room_name">
+                                        <div>{{$motel->name}} - {{ $room->name }}</div>
+                                        @foreach( $renters as $renter)
+                                            @if($room->id == $renter->id_room)
+                                                <div>{{ $renter->last_name }}</div>
+                                            @endif
+                                        @endforeach
+                                    </td>
                                     <td style="text-align: left">
                                         <div>Cũ</div>
                                         <div>Mới</div>

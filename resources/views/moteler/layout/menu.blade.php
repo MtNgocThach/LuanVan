@@ -42,6 +42,23 @@
                     <span class="nav-link-text">Thanh Toán Trọ</span>
                 </a>
             </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard" style="margin-left: 8px;">
+                <div class="dropdown">
+                    <a data-toggle="dropdown" class="nav-link">
+                        <i class="fa fa-fw fa-dashboard"></i>
+                        <span class="nav-link-text">Thanh Toán</span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="background: #0c5460">
+                        <li role="presentation" class="nav-link-text">
+                            <a role="menuitem" tabindex="-1" href="moteler/sales/list" class="nav-link">Lập hoá đơn</a>
+                        </li>
+                        <li role="presentation" class="nav-link-text">
+                            <a role="menuitem" tabindex="-1" href="moteler/sales/listBills" class="nav-link">Danh sách</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
           <?php }else{ ?>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
                     <a class="nav-link" href="admin/account/list">

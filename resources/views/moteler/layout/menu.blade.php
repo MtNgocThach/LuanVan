@@ -5,17 +5,16 @@
                 $user_L = Auth::user();
                 if($user_L->username != "admin"){
             ?>
-
-            {{--<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">--}}
-                {{--<a class="nav-link" href="moteler/catalogue_room/list">--}}
-                  {{--<i class="fa fa-fw fa-dashboard"></i>--}}
-                  {{--<span class="nav-link-text">Loại Phòng</span>--}}
-                {{--</a>--}}
-            {{--</li>--}}
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
                 <a class="nav-link" href="moteler/motels/list">
                     <i class="fa fa-fw fa-dashboard"></i>
                     <span class="nav-link-text">Nhà Trọ</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                <a class="nav-link" href="moteler/catalogue_room/list">
+                  <i class="fa fa-fw fa-dashboard"></i>
+                  <span class="nav-link-text">Loại Phòng</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
@@ -34,12 +33,6 @@
                 <a class="nav-link" href="moteler/profile/info">
                     <i class="fa fa-fw fa-dashboard"></i>
                     <span class="nav-link-text">Thông tin</span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                <a class="nav-link" href="moteler/sales/list">
-                    <i class="fa fa-fw fa-dashboard"></i>
-                    <span class="nav-link-text">Thanh Toán Trọ</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard" style="margin-left: 8px;">

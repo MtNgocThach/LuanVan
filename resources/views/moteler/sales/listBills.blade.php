@@ -34,17 +34,18 @@
                         ?>
                         <tr id="{{ $sale->id }}">
                             <td>
+                                {{ $sale->id_room }}
                                 @foreach($rooms as $room)
-                                    @if($room->id == $sale->id_room)
-                                        {{ $room->name }}
-                                    @endif
+                                    {{--@if($room->id == $sale->id_room)--}}
+                                        {{--{{ $room->name }}--}}
+                                    {{--@endif--}}
                                 @endforeach
+
                             </td>
                             <td>
                                 @foreach($renters as $renter)
                                     @if($renter->id_room == $sale->id_room)
                                         {{ $renter->last_name }} {{ $renter->first_name  }}
-                                        {{ $sale->id_room }}
                                     @endif
                                 @endforeach
                             </td>
@@ -52,7 +53,7 @@
                             <td>{{ $sale->sum }}</td>
                             <?php if ($sale->status == 2){ ?>
                                 <td>
-                                    <button class="contact100-form-btn" type="button" data-toggle="modal" onclick="" data-target="#payDebtModal">
+                                    <button class="contact100-form-btn" type="button" data-toggle="modal" onclick="payDebt({{ $sale->id_room }})" data-target="#payDebtModal">
                                         <i class="fa fa-upload"> Thanh toán nợ</i>
                                     </button>
                                 </td>
@@ -189,7 +190,7 @@
                     <div class="wrap-input100 validate-input bg1" data-validate="Vui lòng nhập số tiền...">
                         <span class="label-input100">Số tiền thanh toán</span>
                         <input class="input100" type="text" name="pay" placeholder="Số tiền...">
-                        <input class="input100" type="text" id="id" name="id" placeholder="id_room" hidden>
+                        <input class="input100" type="text" id="id_payDebt" name="id_payDebt" placeholder="id_room" hidden>
                     </div>
                     <div class="container-contact100-form-btn">
                         <button class="contact100-form-btn">
@@ -208,15 +209,19 @@
 
 <script type="text/javascript">
 
-    var dataCon = {!! $sales !!};
-    dataCon.forEach(function (element) {
-        if (element['status' == 2]){
-            document.getElementById(element['id']).setAttribute("style", 'color: red');
-        }
-    }) ;
+    {{--var dataCon = {!! $sales !!};--}}
+    {{--dataCon.forEach(function (element) {--}}
+        {{--if (element['status' == 2]){--}}
+            {{--// document.getElementById(element['id']).setAttribute("style", 'color: red');--}}
+        {{--}--}}
+    {{--}) ;--}}
 
     function pay($id) {
         document.getElementById("id").setAttribute("value", $id);
+    }
+
+    function payDebt($id) {
+        document.getElementById("id_payDebt").setAttribute("value", $id);
     }
 
     function detail($id) {

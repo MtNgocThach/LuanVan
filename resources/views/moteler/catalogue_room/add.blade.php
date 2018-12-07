@@ -23,7 +23,7 @@
 					{{--<input class="input100" type="text" name="name" placeholder="Loại phòng">--}}
 				{{--</div>--}}
 				<div class="wrap-input100 bg1 rs1-wrap-input100 rs1-wrap-input100" data-validate = "Vui lòng chọn loại phòng trọ">
-					<span class="label-input100">Phòng trọ</span>
+					<span class="label-input100">Loại Phòng</span>
 					<select name="id_ctl" id="" class="input100" class="validate-input" style="border-radius:5px; width:90%">
 						@foreach( $ctls as $ctl)
 							<option value="{{ $ctl->id }}">
@@ -34,7 +34,7 @@
 					</select>
 				</div>
 				<div class="wrap-input100 bg1 rs1-wrap-input100 rs1-wrap-input100" data-validate = "Vui lòng chọn tên phòng trọ">
-					<span class="label-input100">Phòng trọ</span>
+					<span class="label-input100">Nhà trọ</span>
 					<select name="id_mtl" id="" class="input100" class="validate-input" style="border-radius:5px; width:90%">
 						@foreach( $mtls as $mtl)
 							<option value="{{ $mtl->id }}">

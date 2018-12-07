@@ -171,7 +171,8 @@ class roomsCtrl extends Controller
         $room = rooms::find($id);
         $price = catalogue_room::where('id_mler',(Auth::user())->id_mler)
                                 ->where('id', $room->id_ctl)->value('price');
-        $allroom = rooms::where('id_mler', (Auth::user())->id_mler)->get();
+        $allroom = rooms::where('id_mler', (Auth::user())->id_mler)
+                                ->where('status', 0)->get();
         $price_rooms = catalogue_room::where('id_mler',(Auth::user())->id_mler)->get();
 
         return view('moteler/rooms/change',['room'=>$room, 'price'=>$price, 'rooms'=>$allroom, 'price_rooms'=>$price_rooms]);
@@ -204,11 +205,13 @@ class roomsCtrl extends Controller
 
         $debt = $res->debt + $res->cost_date + ($no_elec*$price_elec) + ($no_water*$price_water);
 
+        $room_change->status = 1;
         $room_change->debt = $debt;
         $room_change->deposit = $rm->deposit;
         $room_change->pay_deposit = $rm->pay_deposit;
         $room_change->date_change = date('Y/m/d');
 
+        $rm->status = 0;
         $rm->debt = 0;
         $rm->deposit = 0;
         $rm->pay_deposit = 0;

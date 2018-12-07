@@ -84,9 +84,25 @@ class adAccCtrl extends Controller
 
             $acc_new->save();
 
+            $data = [
+                'nFrom'         => 'Website hệ thống quản lý nhà trọ',
+                'email_moteler' => $moteler->email,
+                'title'         => 'Hệ thống nhà trọ: Tài khoản của bạn',
+                'account'       => $acc->username,
+                'first_name'    => $moteler->frist_name,
+                'last_name'     => $moteler->last_name,
+                'address'       => $moteler->$moteler->address,
+                'content'       => 'Website Hệ thống quản lý nhà trọ xin gửi tới chủ nhà trọ '.$moteler->last_name.$moteler->frist_name.
+                    ' tài khoản và mật khẩu của bạn để đnăg nhập và sử dụng hệ thống. Tài khoản :'.$acc->username.' 
+                                    , mật khẩu: $acc->password. Để đảm bảo an toàn thông tin, xin quý khách thay đổi mạt khẩu được cung cấp.'
+
+            ];
+
+            $this->sendMail($data);
+
             return redirect('admin/account/add')->with('mess','Thêm Tài Khoản Mới Thành công');
 
-//            $this->sendEmail();
+
         }
     }
 

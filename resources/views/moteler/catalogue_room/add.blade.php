@@ -45,19 +45,19 @@
 					</select>
 				</div>
 
-				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Vui lòng điền số người ở...">
+				<div class="wrap-input100 bg1 rs1-wrap-input100" data-validate = "Vui lòng điền số người ở...">
 					<span class="label-input100">Số người *</span>
-					<input class="input100" type="" name="numpers" placeholder="Số người ">
+					<input class="input100" type="number" id="numpers" name="numpers" onchange="checkNo()" placeholder="Số người ">
 				</div>
 
-				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Vui lòng điền giá loại phòng">
+				<div class="wrap-input100 bg1 rs1-wrap-input100" data-validate = "Vui lòng điền giá loại phòng">
 					<span class="label-input100">Giá *</span>
-					<input class="input100" type="" name="price" placeholder="Giá phòng">
+					<input class="input100" id="price" type="number" name="price" placeholder="Giá phòng" onchange="checkNo()">
 				</div>
 
-				<div class="wrap-input100  bg0 rs1-alert-validate rs1-wrap-input100">
+				<div class="wrap-input100 bg0 rs1-alert-validate rs1-wrap-input100" data-validate = "Vui lòng điền diện tích phòng">
 					<span class="label-input100">Diện tích</span>
-					<input class="input100" type="text" name="area" >
+					<input class="input100" id="area" type="number" name="area" onchange="checkNo()" >
 				</div>
 
 				<div class="wrap-input100  bg0 rs1-alert-validate rs1-wrap-input100">
@@ -83,6 +83,8 @@
 	<script src="moteler_asset/form/vendor/bootstrap/js/popper.js"></script>
 	<script src="moteler_asset/form/vendor/bootstrap/js/bootstrap.min.js"></script>
 	<script src="moteler_asset/form/vendor/select2/select2.min.js"></script>
+	<script src="moteler_asset/form/js/main.js"></script>
+
 	<script>
 		$(".js-select2").each(function(){
 			$(this).select2({
@@ -103,6 +105,19 @@
 				});
 			});
 		})
+		function checkNo() {
+		    var fields = ['numpers', 'area', 'price'];
+            fields.forEach(function (item) {
+                var con = document.getElementById(item).value;
+                if (con != '' || con == '') {
+                    if (!con.indexOf('-')){
+                        var thisAlert = $("#"+item).parent();
+                        $(thisAlert).addClass('alert-validate');
+                        $(thisAlert).append('<span class="btn-hide-validate">&#xf136;</span>');
+                    }
+				}
+            })
+        }
 	</script>
 <!--===============================================================================================-->
 	<script src="moteler_asset/form/vendor/daterangepicker/moment.min.js"></script>
@@ -134,7 +149,6 @@
 	        $('.contact100-form-range-value input[name="to-value"]').val($('#value-upper').html());
 	    });
 	</script>
-	<script src="moteler_asset/form/js/main.js"></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>

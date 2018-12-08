@@ -39,9 +39,9 @@
 					</select>
 				</div>
 
-				<div class="wrap-input100 validate-input bg1 " data-validate = "Vui lòng điền giá dịch vụ">
+				<div class="wrap-input100 bg1 " data-validate = "Vui lòng điền giá dịch vụ">
 					<span class="label-input100">Giá *</span>
-					<input class="input100" type="" name="price" placeholder="Giá ">
+					<input class="input100" type="number" id="price" name="price" placeholder="Giá " onchange="checkNo()">
 				</div>
 				
 
@@ -68,6 +68,8 @@
 <script src="moteler_asset/form/vendor/bootstrap/js/popper.js"></script>
 <script src="moteler_asset/form/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="moteler_asset/form/vendor/select2/select2.min.js"></script>
+<script src="moteler_asset/form/js/main.js"></script>
+
 <script>
 	$(".js-select2").each(function(){
 		$(this).select2({
@@ -97,6 +99,20 @@
             document.getElementsByTagName("select")[0].setAttribute("hidden", "");
             document.getElementsByTagName("select")[0].removeAttribute("name");
         }
+    }
+
+    function checkNo() {
+        var fields = ['price'];
+        fields.forEach(function (item) {
+            var con = document.getElementById(item).value;
+            if (con != '' || con == '') {
+                if (!con.indexOf('-')){
+                    var thisAlert = $("#"+item).parent();
+                    $(thisAlert).addClass('alert-validate');
+                    $(thisAlert).append('<span class="btn-hide-validate">&#xf136;</span>');
+                }
+            }
+        })
     }
 </script>
 <!--===============================================================================================-->
@@ -129,8 +145,6 @@
 	        $('.contact100-form-range-value input[name="to-value"]').val($('#value-upper').html());
 	    });
 	</script>
-	<script src="moteler_asset/form/js/main.js"></script>
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 <script>

@@ -45,6 +45,9 @@ class Controller extends BaseController
         //goi thu vien
         @include('email\class.smtp.php');
         @include ('email\class.phpmailer.php');
+        $result = [
+            'code' => ''
+        ];
         $pass = '';
         $acc = '';
 
@@ -54,7 +57,7 @@ class Controller extends BaseController
         $mFrom              = 'SCMsoftware01@gmail.com';            //dia chi email cua ban
         $mPass              = 'Thach123';                           //mat khau email cua ban
         $nTo                = 'Motel';                              //Ten nguoi nhan
-        $mTo                = $data['email_moteler'];               //dia chi nhan mail
+        $mTo                = $data['email_to'];                    //dia chi nhan mail
         $mail               = new PHPMailer();
         $body               = $data['content'];                     // Noi dung email
         $title              = $data['title'];                       //Tieu de gui mail
@@ -69,15 +72,13 @@ class Controller extends BaseController
         $mail->Username     = $mFrom;                               // khai bao dia chi email
         $mail->Password     = $mPass;                               // khai bao mat khau
         $mail->SetFrom($mFrom, $nFrom);
-        $mail->AddReplyTo($mTo);                                    //khi nguoi dung phan hoi se duoc gui den email nay
+        $mail->AddReplyTo($data['email_from']);                     //khi nguoi dung phan hoi se duoc gui den email nay
         $mail->Subject      = $title;                               // tieu de email
         $mail->MsgHTML($body);                                      // noi dung chinh cua mail se nam o day.
         $mail->AddAddress($mTo, $nTo);
         // thuc thi lenh gui mail
         // echo $res->blog;
-        $result = [
-            'code' => ''
-        ];
+
         if(!$mail->Send()) {
             $result['code'] = '0';
         } else {

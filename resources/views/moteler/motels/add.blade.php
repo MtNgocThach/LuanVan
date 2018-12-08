@@ -36,14 +36,14 @@
 					<input class="input100" type="text" name="address" placeholder="Địa chỉ">
 				</div>
 
-				<div class="wrap-input100 bg1 rs1-wrap-input100" data-validate = "Vui lòng điền số người ở...">
+				<div class="wrap-input100 bg1 rs1-wrap-input100" data-validate = "Vui lòng điền kinh độ...">
 					<span class="label-input100">Kinh độ</span>
-					<input class="input100" type="number" name="longitude" placeholder="Số người ">
+					<input class="input100" type="number" id="longitude" name="longitude" onchange="checkNo()" placeholder="Kinh độ ">
 				</div>
 
-				<div class="wrap-input100 bg1 rs1-wrap-input100" data-validate = "Vui lòng điền số người ở...">
+				<div class="wrap-input100 bg1 rs1-wrap-input100" data-validate = "Vui lòng điền vĩ độ...">
 					<span class="label-input100">Vĩ độ</span>
-					<input class="input100" type="number" name="longitude" placeholder="Số người ">
+					<input class="input100" type="number" id="latitude" name="latitude" onchange="checkNo()" placeholder="Vĩ độ ">
 				</div>
 
 				{{-- <div class="wrap-input100 bg1 rs1-wrap-input100" data-validate = "Vui lòng điền giá loại phòng">
@@ -77,6 +77,8 @@
 	<script src="moteler_asset/form/vendor/bootstrap/js/popper.js"></script>
 	<script src="moteler_asset/form/vendor/bootstrap/js/bootstrap.min.js"></script>
 	<script src="moteler_asset/form/vendor/select2/select2.min.js"></script>
+	<script src="moteler_asset/form/js/main.js"></script>
+
 	<script>
 		$(".js-select2").each(function(){
 			$(this).select2({
@@ -97,6 +99,19 @@
 				});
 			});
 		})
+        function checkNo() {
+            var fields = ['longitude', 'latitude'];
+            fields.forEach(function (item) {
+                var con = document.getElementById(item).value;
+                if (con != '' || con == '') {
+                    if (!con.indexOf('-')){
+                        var thisAlert = $("#"+item).parent();
+                        $(thisAlert).addClass('alert-validate');
+                        $(thisAlert).append('<span class="btn-hide-validate">&#xf136;</span>');
+                    }
+                }
+            })
+        }
 	</script>
 <!--===============================================================================================-->
 	<script src="moteler_asset/form/vendor/daterangepicker/moment.min.js"></script>
@@ -128,7 +143,6 @@
 	        $('.contact100-form-range-value input[name="to-value"]').val($('#value-upper').html());
 	    });
 	</script>
-	<script src="moteler_asset/form/js/main.js"></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>

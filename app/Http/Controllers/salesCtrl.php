@@ -13,6 +13,7 @@ use App\motels;
 use App\catalogue_room;
 use App\renter;
 use App\sales;
+use App\moteler;
 
 class salesCtrl extends Controller
 {
@@ -49,7 +50,6 @@ class salesCtrl extends Controller
             if ($res->input('no_elec_new'.$i) == '' && $res->input('no_water_new'.$i) == ''){
                 continue;
             } else{
-
                 $sale = new sales();
 
                 $room->no_water = $res->input('no_water_new'.$i);
@@ -89,9 +89,11 @@ class salesCtrl extends Controller
                 $sale->status = 1;
                 $sale->date = date('Y/d/m');
 
-                $debt_old = $res->input('debt'.$i);
-                $cost_elec = ($sale->no_elec_new - $sale->no_elec_old) * $sale->price_elec;
-                $cost_water = ($sale->no_water_new - $sale->no_water_old) * $sale->price_water;
+                $debt_old   = $res->input('debt'.$i);
+                $no_elec    = $sale->no_elec_new - $sale->no_elec_old;
+                $no_water   = $sale->no_elec_new - $sale->no_elec_old;
+                $cost_elec  = $no_elec * $sale->price_elec;
+                $cost_water = $no_water * $sale->price_water;
 
                 if ($room->deposit < $room->pay_deposit){
                     $sale->sum = $sale->room_cost + $cost_elec  + $cost_water + $debt_old - $room->deposit ;
@@ -104,25 +106,25 @@ class salesCtrl extends Controller
 
                 $sale->save();
                 $room->save();
+
+                $moteler = moteler::find(Auth::user()->id_mler);
+                $renter = renter::where('id_room', $room->id)->get();
+                $dataMail = [
+                    'nFrom'         => 'Website hệ thống quản lý nhà trọ','email_from'    => '',
+                    'email_from'    => $moteler->email,
+                    'email_to'      => $renter->email,
+                    'title'         => 'Tiền trọ tháng '. date('m'),
+                    'content'       => 'Website Hệ thống quản lý nhà trọ xin thông báo để người thuê trọ:  '.
+                                    $renter->last_name.' '.$renter->first_name.' Tiền trọ tháng '.date('m').
+                                    'Tổng cộng là: '.$sale->sum.' Chi tiết: Tiêu thụ '.$no_elec.' ký điện với giá định mức là '.$cost_elec.
+                                    'Và tiêu thụ '.$no_water.' ký nước với giá '.$cost_water.'/ khối'. 'Tiền gồm tiền phòng '.$sale->room_cost.
+                                    ', và tiền điện, nước. Tổng tiền đã trừ bớt 1 phần tiền cọc hàng tháng. Vui lòng thanh toán tiền trọ đúng hạn.'
+
+                ];
+
+                $this->sendMail($dataMail);
             }
-
         }
-        $dataMail = [
-            'nFrom'         => 'Website hệ thống quản lý nhà trọ',
-            'email_moteler' => $moteler->email,
-            'title'         => 'Hệ thống nhà trọ: Tài khoản của bạn',
-            'account'       => $acc->username,
-            'first_name'    => $moteler->frist_name,
-            'last_name'     => $moteler->last_name,
-            'address'       => $moteler->$moteler->address,
-            'content'       => 'Website Hệ thống quản lý nhà trọ xin gửi tới chủ nhà trọ '.$moteler->last_name.$moteler->frist_name.
-                ' tài khoản và mật khẩu của bạn để đnăg nhập và sử dụng hệ thống. Tài khoản :'.$acc->username.' 
-                                    , mật khẩu: $acc->password. Để đảm bảo an toàn thông tin, xin quý khách thay đổi mạt khẩu được cung cấp.'
-
-        ];
-
-
-        $this->sendMail($dataMail);
 
         return redirect('moteler/sales/list')->with('mess','Lưu Hoá Đơn Thành công');
 //        $ctls = catalogue_room::all();

@@ -34,7 +34,7 @@
                     <!-- Blog Post -->
                     <article class="blog_post">
                         <div class="blog_post_image">
-                            <div class="blog_post_image_background" style="background-image:url(client_asset/images/blog_1.jpg)"></div>
+                            <div class="blog_post_image_background" style="background-image:url(moteler_asset/images/{{ $ctl->motels->image }})"></div>
                         </div>
                         <h3 class="blog_post_title">{{ $ctl->motels->name }}</h3>
                         <div class="blog_post_meta">

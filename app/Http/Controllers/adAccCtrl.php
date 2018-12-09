@@ -88,10 +88,11 @@ class adAccCtrl extends Controller
                 'nFrom'         => 'Website hệ thống quản lý nhà trọ',
                 'email_from'    => '',
                 'email_to'      => $moteler->email,
+                'nTo'           => $moteler->last_name.' '.$moteler->frist_name,
                 'title'         => 'Hệ thống nhà trọ: Tài khoản của bạn',
-                'content'       => 'Website Hệ thống quản lý nhà trọ xin gửi tới chủ nhà trọ '.$moteler->last_name.$moteler->frist_name.
+                'content'       => 'Website Hệ thống quản lý nhà trọ xin gửi tới chủ nhà trọ '.$moteler->last_name.' '.$moteler->frist_name.
                                     ' tài khoản và mật khẩu của bạn để đnăg nhập và sử dụng hệ thống. Tài khoản :'.$acc->username.' 
-                                    , mật khẩu: $acc->password. Để đảm bảo an toàn thông tin, xin quý khách thay đổi mạt khẩu được cung cấp.'
+                                    , mật khẩu: '.$acc->password.'. Để đảm bảo an toàn thông tin, xin quý khách thay đổi mạt khẩu được cung cấp.'
 
             ];
 

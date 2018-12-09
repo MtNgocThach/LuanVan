@@ -9,7 +9,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
 use App\PHPMailer;
 use App\SMTP;
@@ -20,8 +20,6 @@ use App\moteler;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-    // $info = (Auth::user())->id_mler;
 
     function __construct()
     {
@@ -51,12 +49,10 @@ class Controller extends BaseController
         $pass = '';
         $acc = '';
 
-//        if (Auth::)
-
-        $nFrom              = $data['nfrom'];                       //mail duoc gui tu dau, thuong de ten cong ty ban
+        $nFrom              = $data['nFrom'];                       //mail duoc gui tu dau, thuong de ten cong ty ban
         $mFrom              = 'SCMsoftware01@gmail.com';            //dia chi email cua ban
         $mPass              = 'Thach123';                           //mat khau email cua ban
-        $nTo                = 'Motel';                              //Ten nguoi nhan
+        $nTo                = $data['nTo'];                              //Ten nguoi nhan
         $mTo                = $data['email_to'];                    //dia chi nhan mail
         $mail               = new PHPMailer();
         $body               = $data['content'];                     // Noi dung email

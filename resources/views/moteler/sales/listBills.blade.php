@@ -34,11 +34,10 @@
                         ?>
                         <tr id="{{ $sale->id }}">
                             <td>
-                                {{ $sale->id_room }}
                                 @foreach($rooms as $room)
-                                    {{--@if($room->id == $sale->id_room)--}}
-                                        {{--{{ $room->name }}--}}
-                                    {{--@endif--}}
+                                    @if($room->id == $sale->id_room)
+                                        {{ $room->name }}
+                                    @endif
                                 @endforeach
 
                             </td>

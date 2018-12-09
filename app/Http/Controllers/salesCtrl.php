@@ -25,13 +25,6 @@ class salesCtrl extends Controller
         $renters = renter::where('id_mler',(Auth::user())->id_mler)->get();
 
         $sales = sales::where('id_mler', (Auth::user())->id_mler)->get();
-//        foreach ($sales as $sale){
-//            $d = date_format(new DateTime($sale->date), 'm');
-////
-////            $a = date('m');
-//            var_dump($d);
-//        }
-//        die;
 
         return view('moteler.sales.list',['rooms'=>$rooms, 'sers'=>$services,
                                                 'mls'=>$motels,'renters'=>$renters, 'sales'=>$sales]);
@@ -71,7 +64,7 @@ class salesCtrl extends Controller
                 }
 
                 $sale->services_cost = 0;
-                $price = catalogue_room::where('id_mls', $room->id_mls)
+                $price = catalogue_room::where('id_mls', $room->id_mls)->where('id_mler', (Auth::user())->id_mler)
                                         ->where('id', $room->id_ctl)->value('price');
                 $change = date_format(new DateTime($room->date_change), 'm');
                 $m_now = date('m');
@@ -87,7 +80,7 @@ class salesCtrl extends Controller
                 $sale->id_mls = $room->id_mls;
                 $sale->id_room = $i;
                 $sale->status = 1;
-                $sale->date = date('Y/d/m');
+                $sale->date = date('Y/m/d');
 
                 $debt_old   = $res->input('debt'.$i);
                 $no_elec    = $sale->no_elec_new - $sale->no_elec_old;
@@ -108,17 +101,19 @@ class salesCtrl extends Controller
                 $room->save();
 
                 $moteler = moteler::find(Auth::user()->id_mler);
-                $renter = renter::where('id_room', $room->id)->get();
+                $renter = renter::where('id_room', $room->id)->get()->first();
+
                 $dataMail = [
-                    'nFrom'         => 'Website hệ thống quản lý nhà trọ','email_from'    => '',
+                    'nFrom'         => 'Website hệ thống quản lý nhà trọ',
                     'email_from'    => $moteler->email,
                     'email_to'      => $renter->email,
+                    'nTo'           => $renter->last_name.' '.$renter->first_name,
                     'title'         => 'Tiền trọ tháng '. date('m'),
                     'content'       => 'Website Hệ thống quản lý nhà trọ xin thông báo để người thuê trọ:  '.
-                                    $renter->last_name.' '.$renter->first_name.' Tiền trọ tháng '.date('m').
-                                    'Tổng cộng là: '.$sale->sum.' Chi tiết: Tiêu thụ '.$no_elec.' ký điện với giá định mức là '.$cost_elec.
-                                    'Và tiêu thụ '.$no_water.' ký nước với giá '.$cost_water.'/ khối'. 'Tiền gồm tiền phòng '.$sale->room_cost.
-                                    ', và tiền điện, nước. Tổng tiền đã trừ bớt 1 phần tiền cọc hàng tháng. Vui lòng thanh toán tiền trọ đúng hạn.'
+                                        $renter->last_name.' '.$renter->first_name.' Tiền trọ tháng '.date('m').
+                                        'Tổng cộng là: '.$sale->sum.' Chi tiết: Tiêu thụ '.$no_elec.' ký điện với giá định mức là '.$cost_elec.
+                                        'Và tiêu thụ '.$no_water.' ký nước với giá '.$cost_water.'/ khối'. 'Tiền gồm tiền phòng '.$sale->room_cost.
+                                        ', và tiền điện, nước. Tổng tiền đã trừ bớt 1 phần tiền cọc hàng tháng. Vui lòng thanh toán tiền trọ đúng hạn.'
 
                 ];
 
@@ -127,8 +122,6 @@ class salesCtrl extends Controller
         }
 
         return redirect('moteler/sales/list')->with('mess','Lưu Hoá Đơn Thành công');
-//        $ctls = catalogue_room::all();
-        return view('moteler.sales.list',['rooms'=>$rooms, 'sers'=>$services, 'mls'=>$motels,'a'=>$res->no_elec_old]);
     }
 
 
@@ -149,7 +142,7 @@ class salesCtrl extends Controller
         $room = rooms::find($sale->id_room);
 
         $sale->sum = $sale->sum - $res->pay;
-        $sale->date_pay = date('Y/d/m');
+        $sale->date_pay = date('Y/m/d');
 
         if ($res->pay == $sale->sum){
             $room->debt = 0;

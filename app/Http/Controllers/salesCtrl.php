@@ -152,7 +152,6 @@ class salesCtrl extends Controller
             $room->save();
             return redirect('moteler/sales/list')->with('mess','Đã thanh toán hoá đơn');
         }else{
-
             $room->debt = $sale->sum - $res->pay;
             $sale->status = 2;
             $room->status = 1;
@@ -163,6 +162,32 @@ class salesCtrl extends Controller
     }
 
     public function postPayDebt(Request $res){
+
+        $sale = sales::find($res->id_payDebt);
+        if ($sale == NULL){
+            return redirect('moteler/sales/list')->with('mess','Lỗi lưu hoá đơn');
+        }else{
+            $room = rooms::find($sale->id_room);
+
+            $sale->sum = $sale->sum - $res->pay;
+            $sale->date_pay = date('Y/m/d');
+
+            if ($res->pay == $sale->sum){
+                $room->debt = 0;
+                $room->status = 1;
+                $sale->status = 1;
+                $sale->save();
+                $room->save();
+                return redirect('moteler/sales/listBills')->with('mess','Đã thanh toán hoá đơn');
+            }else{
+                $room->debt = $sale->sum - $res->pay;
+                $sale->status = 2;
+                $room->status = 1;
+                $sale->save();
+                $room->save();
+                return redirect('moteler/sales/listBills')->with('mess','Đã thanh toán một phần hoá đơn');
+            }
+        }
 
 
         var_dump($res->id_payDebt);die;

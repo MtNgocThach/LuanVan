@@ -51,9 +51,6 @@
 					<input class="input100" type="number" name="latitude" placeholder="Giá phòng">
 				</div> --}}
 
-
-				
-
 				<div class="wrap-input100 bg1 " >
 					<span class="label-input100">Mô tả</span>
 					<input class="input100" type="text" name="des" placeholder="Mô tả...">
@@ -98,7 +95,8 @@
 					}
 				});
 			});
-		})
+		});
+
         function checkNo() {
             var fields = ['longitude', 'latitude'];
             fields.forEach(function (item) {

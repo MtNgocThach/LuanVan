@@ -30,7 +30,7 @@
                             $m_sale = date_format(new DateTime($sale->date), 'm');
                             $m_now = date('m');
 
-                            if ($m_sale === $m_now){
+                            if ($m_sale == $m_now){
                         ?>
                         <tr id="{{ $sale->id }}">
                             <td>
@@ -52,7 +52,7 @@
                             <td>{{ $sale->sum }}</td>
                             <?php if ($sale->status == 2){ ?>
                                 <td>
-                                    <button class="contact100-form-btn" type="button" data-toggle="modal" onclick="payDebt({{ $sale->id_room }})" data-target="#payDebtModal">
+                                    <button class="contact100-form-btn" type="button" data-toggle="modal" onclick="payDebt({{ $sale->id }})" data-target="#payDebtModal">
                                         <i class="fa fa-upload"> Thanh toán nợ</i>
                                     </button>
                                 </td>
@@ -157,7 +157,7 @@
                     <div class="wrap-input100 validate-input bg1" data-validate="Vui lòng nhập số tiền...">
                         <span class="label-input100">Số tiền thanh toán</span>
                         <input class="input100" type="text" name="pay" placeholder="Số tiền...">
-                        <input class="input100" type="text" id="id" name="id" placeholder="id_room" hidden>
+                        <input class="input100" type="text" id="id" name="id" hidden>
                     </div>
                     <div class="container-contact100-form-btn">
                         <button class="contact100-form-btn">
@@ -188,13 +188,13 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="wrap-input100 validate-input bg1" data-validate="Vui lòng nhập số tiền...">
                         <span class="label-input100">Số tiền thanh toán</span>
-                        <input class="input100" type="text" name="pay" placeholder="Số tiền...">
-                        <input class="input100" type="text" id="id_payDebt" name="id_payDebt" placeholder="id_room" hidden>
+                        <input class="input100" type="number" name="pay" placeholder="Số tiền..." onchange="checkNo()">
+                        <input class="" type="number" id="id_payDebt" name="id_payDebt" placeholder="id_room" hidden>
                     </div>
                     <div class="container-contact100-form-btn">
                         <button class="contact100-form-btn">
                     <span>
-                        Thanh Toán
+                        Thanh Toán Nợ
                         <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
                     </span>
                         </button>
@@ -206,14 +206,8 @@
     </div>
 </div>
 
-<script type="text/javascript">
 
-    {{--var dataCon = {!! $sales !!};--}}
-    {{--dataCon.forEach(function (element) {--}}
-        {{--if (element['status' == 2]){--}}
-            {{--// document.getElementById(element['id']).setAttribute("style", 'color: red');--}}
-        {{--}--}}
-    {{--}) ;--}}
+<script type="text/javascript">
 
     function pay($id) {
         document.getElementById("id").setAttribute("value", $id);
@@ -221,6 +215,20 @@
 
     function payDebt($id) {
         document.getElementById("id_payDebt").setAttribute("value", $id);
+    }
+
+    function checkNo() {
+        var fields = ['longitude', 'latitude'];
+        fields.forEach(function (item) {
+            var con = document.getElementById(item).value;
+            if (con != '' || con == '') {
+                if (!con.indexOf('-')){
+                    var thisAlert = $("#"+item).parent();
+                    $(thisAlert).addClass('alert-validate');
+                    $(thisAlert).append('<span class="btn-hide-validate">&#xf136;</span>');
+                }
+            }
+        })
     }
 
     function detail($id) {

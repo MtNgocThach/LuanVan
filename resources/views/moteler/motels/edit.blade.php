@@ -84,6 +84,8 @@
 	<script src="moteler_asset/form/vendor/bootstrap/js/popper.js"></script>
 	<script src="moteler_asset/form/vendor/bootstrap/js/bootstrap.min.js"></script>
 	<script src="moteler_asset/form/vendor/select2/select2.min.js"></script>
+	<script src="moteler_asset/form/js/main.js"></script>
+
 	<script>
 		$(".js-select2").each(function(){
 			$(this).select2({
@@ -135,7 +137,6 @@
 	        $('.contact100-form-range-value input[name="to-value"]').val($('#value-upper').html());
 	    });
 	</script>
-	<script src="moteler_asset/form/js/main.js"></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>

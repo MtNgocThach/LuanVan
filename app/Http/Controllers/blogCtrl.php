@@ -16,10 +16,8 @@ class blogCtrl extends Controller
         
         $ctl = catalogue::all();
         $cr = catalogue_room::orderBy('view', 'desc')->get();
-        // echo $ctl;
-        // echo $cr;
-        return view('client.blog',['ctl'=>$ctl,'crs'=>$cr]);
 
+        return view('client.blog',['ctl'=>$ctl,'crs'=>$cr]);
     }
 
     public function postInfo(){

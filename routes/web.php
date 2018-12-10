@@ -74,11 +74,9 @@ Route::group(['prefix'=>'moteler','middleware'=>'motelerLogin'],function(){
     });
 
     //statistics
-
     Route::group(['prefix'=>'statistics'],function(){
 
         Route::get('statistic','statisticsCtrl@showStatistics');
-
 
     });
 

@@ -22,39 +22,39 @@
 
 				<div class="wrap-input100 validate-input rs1-wrap-input100 bg1" data-validate="Vui lòng điền Họ..." >
 					<span class="label-input100">Họ </span>
-					<input class="input100" value="" type="text" name="frist_name" placeholder="Vui lòng điền Họ của bạn...">
+					<input class="input100" type="text" name="frist_name" placeholder="Vui lòng điền Họ của bạn...">
 				</div>
 				<div class="wrap-input100  validate-input rs1-wrap-input100 bg1" data-validate="Vui lòng điền Tên...">
 					<span class="label-input100">Tên </span>
-					<input class="input100" value="" type="text" name="last_name" placeholder="Vui lòng điền Tên của bạn...">
+					<input class="input100"type="text" name="last_name" placeholder="Vui lòng điền Tên của bạn...">
 				</div>
 
 				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Vui lòng điền số điện thoại">
 					<span class="label-input100">Điện thoại</span>
-					<input class="input100" value="" type="text" name="phone" placeholder="Điện thoại">
+					<input class="input100" type="text" name="phone" placeholder="Điện thoại">
 				</div>
 
 				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Vui lòng điền đúng email">
 					<span class="label-input100">Hộp thư</span>
-					<input class="input100" value="" type="text" name="email" placeholder="Hộp thư">
+					<input class="input100" type="text" name="email" placeholder="Hộp thư">
 				</div>
 					
 				<div class="wrap-input100 bg1">
 					<span class="label-input100">Địa chỉ</span>
-					<input class="input100" type="text" value="" name="address" placeholder="Địa chỉ ">
+					<input class="input100" type="text" name="address" placeholder="Địa chỉ ">
 				</div>						
 
-				<div class="wrap-input100  bg0 rs1-alert-validate" data-validate="Vui lòng điền tài khoản">
+				<div class="wrap-input100  bg0 rs1-alert-validate" id="divUser" data-validate="Vui lòng điền tài khoản" onchange="checkAcc()">
 					<span class="label-input100">Tài Khoản</span>
-					<input class="input100"  value=""  type="text" name="user" >
+					<input class="input100" type="text" name="user" id="user" placeholder="Vui lòng nhập tài khoản...">
 				</div>
 				<div class="wrap-input100  bg0 rs1-alert-validate" data-validate="Vui lòng điền mật khẩu">
 					<span class="label-input100">Mật khẩu</span>
-					<input class="input100"  type="password" name="pass" id="pass">
+					<input class="input100" type="password" name="pass" id="pass" placeholder="Vui lòng nhập mật khẩu...">
 				</div>
-				<div class="wrap-input100   bg0 rs1-alert-validate" data-validate="Vui lòng nhập lại mật khẩu">
+				<div class="wrap-input100   bg0 rs1-alert-validate" id="divPassCon" data-validate="Vui lòng nhập lại mật khẩu">
 					<span class="label-input100">Nhập lại mật khẩu</span>
-					<input class="input100"  type="password" name="confirm_pass" placeholder="Vui lòng nhập lại mật khẩu...">
+					<input class="input100" type="password" name="confirm_pass" id="confirm_pass" placeholder="Vui lòng nhập lại mật khẩu..." onchange="checkconfirm()">
 				</div>
 
 				<div class="container-contact100-form-btn">
@@ -95,6 +95,32 @@
 				});
 			});
 		})
+
+		function checkAcc() {
+		    var datas = {!! $accs !!};
+		    var con = document.getElementById('user').value;
+		    datas.forEach(function (item) {
+				if (item['username'] == con) {
+                    var thisAlert = $("#user").parent();
+                    document.getElementById("divUser").setAttribute("data-validate", "Vui lòng chọn tên tài khoản khác");
+                    $(thisAlert).addClass('alert-validate');
+                    $(thisAlert).append('<span class="btn-hide-validate">&#xf136;</span>');
+				}
+            })
+			console.log(datas);
+        }
+
+        function checkconfirm() {
+			var pass 			= document.getElementById('pass').value;
+			var pass_confirm 	= document.getElementById('confirm_pass').value;
+
+			if (pass != pass_confirm){
+                var thisAlert = $("#confirm_pass").parent();
+                document.getElementById("divPassCon").setAttribute("data-validate", "Vui lòng nhập lại đúng mật khẩu");
+                $(thisAlert).addClass('alert-validate');
+                $(thisAlert).append('<span class="btn-hide-validate">&#xf136;</span>');
+			}
+        }
 	</script>
 <!--===============================================================================================-->
 	<script src="moteler_asset/form/vendor/daterangepicker/moment.min.js"></script>

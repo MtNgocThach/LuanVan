@@ -25,8 +25,8 @@
 				<div class="wrap-input100 bg1 rs1-wrap-input100" data-validate = "Vui lòng điền giá loại phòng">
 					<span class="label-input100">Trạng Thái</span>
 					<select name="status" id="" class="input100" class="validate-input" style="border-radius:5px; width:90%">
-						<option value="1" selected="selected">Còn trống</option>
-						<option value="0">Hêt Phòng</option>
+						<option value="0" selected="selected">Còn trống</option>
+						<option value="1">Hêt Phòng</option>
 					</select>
 					{{-- <input class="input100" type="number" name="latitude" placeholder="Giá phòng"> --}}
 				</div>

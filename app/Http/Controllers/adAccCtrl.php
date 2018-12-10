@@ -52,7 +52,9 @@ class adAccCtrl extends Controller
 
     public function getAdd(){
 
-        return view('admin/account/add');
+        $accs = account::all();
+
+        return view('admin/account/add', ['accs'=>$accs]);
     }
 
     public function postAdd(Request $res){

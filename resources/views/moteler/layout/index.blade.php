@@ -35,6 +35,7 @@
   <link rel="stylesheet" type="text/css" href="moteler_asset/form/css/main.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
     {{-- end form --}}
 
@@ -89,7 +90,6 @@
     <!-- Core plugin JavaScript-->
     <script src="moteler_asset/vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Page level plugin JavaScript-->
-    <script src="moteler_asset/vendor/chart.js/Chart.min.js"></script>
     <script src="moteler_asset/vendor/datatables/jquery.dataTables.js"></script>
     <script src="moteler_asset/vendor/datatables/dataTables.bootstrap4.js"></script>
     <!-- Custom scripts for all pages-->

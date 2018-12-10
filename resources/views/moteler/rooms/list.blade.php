@@ -3,7 +3,7 @@
 @section('content')
 <div class="card mb-3">
     <div class="card-header">
-        <i class="fa fa-table"></i> Loại Phòng</div>
+        <i class="fa fa-table"></i> Phòng trọ</div>
     <div class="card-body">
         @if(session('mess'))
             <div class="alert alert-success alert-dismissible">

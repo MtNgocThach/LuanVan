@@ -29,11 +29,27 @@
                     <span class="nav-link-text">Dịch vụ</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                <a class="nav-link" href="moteler/profile/info">
-                    <i class="fa fa-fw fa-dashboard"></i>
-                    <span class="nav-link-text">Thông tin</span>
-                </a>
+            {{--<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">--}}
+                {{--<a class="nav-link" href="moteler/profile/info">--}}
+                    {{--<i class="fa fa-fw fa-dashboard"></i>--}}
+                    {{--<span class="nav-link-text">Thông tin</span>--}}
+                {{--</a>--}}
+            {{--</li>--}}
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard" style="margin-left: 8px;">
+                <div class="dropdown">
+                    <a data-toggle="dropdown" class="nav-link">
+                        <i class="fa fa-fw fa-dashboard"></i>
+                        <span class="nav-link-text">Thông Tin</span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="background: #0c5460">
+                        <li role="presentation" class="nav-link-text">
+                            <a role="menuitem" tabindex="-1" href="moteler/statistics/statistic" class="nav-link">Thống kê</a>
+                        </li>
+                        <li role="presentation" class="nav-link-text">
+                            <a role="menuitem" tabindex="-1" href="moteler/profile/info" class="nav-link">Tài Khoản</a>
+                        </li>
+                    </ul>
+                </div>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard" style="margin-left: 8px;">
                 <div class="dropdown">

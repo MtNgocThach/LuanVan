@@ -28,20 +28,19 @@
                     <input class="input100" type="text" name="first_name" placeholder="Tên...">
                 </div>
 
-                {{--<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Vui lòng điền tên">--}}
-                    {{--<span class="label-input100">Tên người thuê *</span>--}}
-                    {{--<input class="input100" type="text" name="	first_name" placeholder="Tên...">--}}
-                {{--</div>--}}
-
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Vui lòng điền số người ở">
                     <span class="label-input100">Số người *</span>
                     <input class="input100" type="text" name="no_per" placeholder="Số người...">
                 </div>
 
-
-                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Vui lòng điền số người ở">
+                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Vui lòng điền tiền cọc">
                     <span class="label-input100">Tiền cọc *</span>
                     <input class="input100" type="text" name="deposit" placeholder="Tiền cọc"...>
+                </div>
+
+                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Vui lòng điền số tiền trừ hàng tháng">
+                    <span class="label-input100">Cọc trừ theo tháng *</span>
+                    <input class="input100" type="text" name="pay_deposit" placeholder="Tiền cọc trừ theo tháng"...>
                 </div>
 
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Vui lòng điền số điện thoại">
@@ -49,7 +48,7 @@
                     <input class="input100" type="text" name="phone" placeholder="Số điện thoại..">
                 </div>
 
-                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Vui lòng điền số điện thoại">
+                <div class="wrap-input100 validate-input bg1 " data-validate="Vui lòng điền số điện thoại">
                     <span class="label-input100">Thư điện tử(email) *</span>
                     <input class="input100" type="text" name="email" placeholder="Email...">
                 </div>

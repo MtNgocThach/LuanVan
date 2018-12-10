@@ -33,8 +33,8 @@ class roomsCtrl extends Controller
 
         $room->status = 1;
         $room->deposit = $res->deposit;
+        $room->pay_deposit = $res->pay_deposit;
         $room->no_per = $res->no_per;
-
 
         $renter->first_name = $res->first_name;
         $renter->last_name = $res->last_name;
@@ -42,7 +42,6 @@ class roomsCtrl extends Controller
         $renter->email = $res->email;
         $renter->id_room = $id;
         $renter->id_mler = (Auth::user())->id_mler;
-
 
         $room->save();
         $renter->save();
@@ -154,6 +153,8 @@ class roomsCtrl extends Controller
         
         $rooms = new rooms;
         $rooms->name = $res->name;
+        $rooms->no_elec = $res->no_elec;
+        $rooms->no_water = $res->no_water;
         $rooms->status = 0;
         $rooms->description = $res->des;
         $rooms->id_ctl = $res->id_ctl;
@@ -174,6 +175,9 @@ class roomsCtrl extends Controller
         $allroom = rooms::where('id_mler', (Auth::user())->id_mler)
                                 ->where('status', 0)->get();
         $price_rooms = catalogue_room::where('id_mler',(Auth::user())->id_mler)->get();
+
+        $allroom = rooms::where('id_mler', (Auth::user())->id_mler)
+            ->where('status', 0)->get();
 
         return view('moteler/rooms/change',['room'=>$room, 'price'=>$price, 'rooms'=>$allroom, 'price_rooms'=>$price_rooms]);
     }

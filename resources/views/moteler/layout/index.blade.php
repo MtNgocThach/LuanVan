@@ -33,7 +33,10 @@
   <link rel="stylesheet" type="text/css" href="moteler_asset/form/vendor/noui/nouislider.min.css">
   <link rel="stylesheet" type="text/css" href="moteler_asset/form/css/util.css">
   <link rel="stylesheet" type="text/css" href="moteler_asset/form/css/main.css">
-  {{-- end form --}}
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+    {{-- end form --}}
 
   <link rel="stylesheet" type="text/css" href="moteler_asset/css/mystyle.css">
 

@@ -4,7 +4,12 @@
 <div class="card mb-3">
     <div class="card-header">
         <i class="fa fa-table"></i> Loại Phòng</div>
-    <div class="card-body"> 
+    <div class="card-body">
+        @if(session('mess'))
+            <div class="alert alert-success alert-dismissible">
+                {{ session('mess') }}
+            </div>
+        @endif
 
          <div class="act_add" style="float:right;" >
             <button class="btn btn-info" type="button">
@@ -22,7 +27,7 @@
                 <th>Phòng</th>
                 <th>Loại phòng</th>
                 <th>Trạng thái</th>
-                <th>Mô tả</th>
+                <th></th>
                 <th colspan="2"></th>
             </tr>
             </thead>

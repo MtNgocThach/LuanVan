@@ -34,58 +34,67 @@
                     @foreach($mls as $motel)
                         @foreach($rooms as $room)
                             @if($motel->id == $room->id_mls)
-                                <tr>
-                                        <td id="room_name">
-                                            <div>{{$motel->name}} - {{ $room->name }}</div>
-                                            @foreach( $renters as $renter)
-                                                @if($room->id == $renter->id_room)
-                                                    <div>{{ $renter->last_name }}</div>
-                                                @endif
-                                            @endforeach
-                                        </td>
-                                    <td style="text-align: left">
-                                        <div>Cũ</div>
-                                        <div>Mới</div>
-                                    </td>
-                                    <td>
-                                        <div><input type="text" id="no_elec_old" name="no_elec_old{{ $room->id }}" readonly="true" value="{{ $room->no_elec }}"></div>
-                                        <div><input type="text" id="no_elec_new" name="no_elec_new{{ $room->id }}" value=""></div>
-                                    </td>
-                                    <td style="text-align: left">
-                                        <div>Cũ</div>
-                                        <div>Mới</div>
-                                    </td>
-                                    <td>
-                                        <div><input type="text" id="no_water_old" name="no_water_old{{ $room->id }}" readonly="true" value="{{ $room->no_water }}"></div>
-                                        <div><input type="text" id="no_water_new" name="no_water_new{{ $room->id }}" value=""></div>
-                                    </td>
-                                    <td>
-                                        @foreach($sers as $ser)
-                                            @if($ser->id_mls == $room->id_mls)
-                                                <div>
-                                                    <input type="text" readonly="true"
-                                                           value="@if(!in_array($ser->name, array('Điện', 'Nước'))) {{ $ser->name }}@endif">
-                                                </div>
-                                            @endif
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        @foreach($sers as $ser)
-                                            @if($ser->id_mls == $room->id_mls)
-                                                <div>
-                                                    <input type="text" id="price_{{$ser->name}}" name="price_{{ $ser->name }}{{ $room->id }}" readonly="true"
-                                                           value="@if(!in_array($ser->name, array('Điện', 'Nước'))) {{$ser->price}} @endif">
-                                                </div>
-                                            @endif
-                                        @endforeach
-                                    </td>
-                                    <td>{{ $room->debt }}</td>
-                                    <td class="act">
-                                        <button class="contact100-form-btn">
-                                            <i class="fa fa-upload"> Lưu</i>
-                                        </button>
-                                    </td>
-                                </tr>
+                                @foreach($sales as $sale)
+                                    <?php
+                                    $m_sale = date_format(new DateTime($sale->date), 'm/Y');
+                                    $m_now = date('m/Y');
+                                    ?>
+                                    @if($sale->id_room == $room->id && $m_sale != $m_now)
+                                        <tr>
+                                            <td id="room_name">
+                                                <div>{{$motel->name}} - {{ $room->name }}</div>
+                                                @foreach( $renters as $renter)
+                                                    @if($room->id == $renter->id_room)
+                                                        <div>{{ $renter->last_name }} {{ $renter->first_name }}</div>
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td style="text-align: left">
+                                                <div>Cũ</div>
+                                                <div>Mới</div>
+                                            </td>
+                                            <td>
+                                                <div><input type="text" id="no_elec_old" name="no_elec_old{{ $room->id }}" readonly="true" value="{{ $room->no_elec }}"></div>
+                                                <div><input type="text" id="no_elec_new" name="no_elec_new{{ $room->id }}" value=""></div>
+                                            </td>
+                                            <td style="text-align: left">
+                                                <div>Cũ</div>
+                                                <div>Mới</div>
+                                            </td>
+                                            <td>
+                                                <div><input type="text" id="no_water_old" name="no_water_old{{ $room->id }}" readonly="true" value="{{ $room->no_water }}"></div>
+                                                <div><input type="text" id="no_water_new" name="no_water_new{{ $room->id }}" value=""></div>
+                                            </td>
+                                            <td>
+                                                @foreach($sers as $ser)
+                                                    @if($ser->id_mls == $room->id_mls)
+                                                        <div>
+                                                            <input type="text" readonly="true"
+                                                                   value="@if(!in_array($ser->name, array('Điện', 'Nước'))) {{ $ser->name }}@endif">
+                                                        </div>
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td>
+                                                @foreach($sers as $ser)
+                                                    @if($ser->id_mls == $room->id_mls)
+                                                        <div>
+                                                            <input type="text" id="price_{{$ser->name}}" name="price_{{ $ser->name }}{{ $room->id }}" readonly="true"
+                                                                   value="@if(!in_array($ser->name, array('Điện', 'Nước'))) {{$ser->price}} @endif">
+                                                        </div>
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td>{{ $room->debt }}</td>
+                                            <td class="act">
+                                                <button class="contact100-form-btn">
+                                                    <i class="fa fa-upload"> Lưu</i>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                    @endif
+                                @endforeach
                             @endif
                         @endforeach
                     @endforeach
@@ -103,6 +112,7 @@
     tbody tr td:nth-child(3) div input, td:nth-child(5) div input, td:nth-child(7) div input, td:nth-child(10) div input{
         text-align: center;
         width: 100%;
+        color: red;
     }
     tbody td:nth-child(9), tbody td:nth-child(10) {
         text-align: left;

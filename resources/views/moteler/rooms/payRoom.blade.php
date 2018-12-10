@@ -3,7 +3,7 @@
 @section('content')
 <div class="card mb-3">
 <div class="card-header">
-    <i class="fa fa-table"></i> Trả Phòng {{ $room->name }}
+    <i class="fa fa-table"></i> Trả phòng {{ $room->name }}
 </div>
 <div class="card-body">
 
@@ -63,7 +63,7 @@
                             <td class="act">
                                 <button class="contact100-form-btn">
                                             <span>
-                                                Thanh toán/ trả phòng
+                                                Trả phòng
                                                 <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
                                             </span>
                                 </button>

@@ -55,11 +55,14 @@ class motelsCtrl extends Controller
         $mtl->latitude = $res->latitude;
         $mtl->status = $res->status;
         $mtl->description = $res->des;
-
         $mtl->id_mler = (Auth::user())->id_mler;
 
-        $mtl->save();
+        $file = $res->image;
+        $mtl->image = $file->getClientOriginalName();
+        $location = 'moteler_asset/form/images';
+        $file->move($location, $mtl->image);
 
+        $mtl->save();
 
         return redirect('moteler/motels/edit/'.$id)->with('mess','Sửa Nhà Trọ Thành công');
     }

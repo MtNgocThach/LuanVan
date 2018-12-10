@@ -47,21 +47,7 @@
             if($(input).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {
                 return false;
             }
-        }
-		// my_validate
-		else if($(input).attr('type') == 'number' || $(input).attr('name') == 'number') {
-            if($(input).val().trim().match([0-9]) == null) {
-                return false;
-            }
-        }
-        // else if($(input).attr('name') == 'confirm_pass'){
-        //     if($(input).val().trim() != $("#pass").val().trim()) {
-        //         return false;
-        //     }
-        // }
-
-		// end mymyvalidate
-        else {
+        }else {
             if($(input).val().trim() == ''){
                 return false;
             }

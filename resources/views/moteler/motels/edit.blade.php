@@ -11,7 +11,7 @@
 			</div>
 			@endif
 
-			<form class="contact100-form validate-form" action="moteler/motels/edit/{{ $mtl->id }}" method="POST">
+			<form class="contact100-form validate-form" action="moteler/motels/edit/{{ $mtl->id }}" method="POST" enctype="multipart/form-data">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 				<span class="contact100-form-title">
@@ -35,9 +35,14 @@
 					{{-- <input class="input100" type="number" name="latitude" placeholder="Giá phòng"> --}}
 				</div>
 
-				<div class="wrap-input100 validate-input bg1" data-validate="Vui lòng điền địa chỉ">
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Vui lòng điền địa chỉ">
 					<span class="label-input100">Địa chỉ *</span>
 					<input class="input100" type="text" value="{{ $mtl->address }}" name="address" placeholder="Địa chỉ">
+				</div>
+
+				<div class="wrap-input100 bg1 rs1-wrap-input100" data-validate = "Vui lòng chọn hình">
+					<span class="label-input100">Hình ảnh</span>
+					<input class="input100" type="file" value="{{ $mtl->image }}" name="image" required="true" placeholder="Hình ảnh">
 				</div>
 
 				<div class="wrap-input100 bg1 rs1-wrap-input100" data-validate = "Vui lòng điền Kinh độ">
@@ -49,14 +54,6 @@
 					<span class="label-input100">Vĩ độ</span>
 					<input class="input100" readonly="readonly" type="number" value="{{ $mtl->latitude }}" name="latitude" placeholder="Vĩ độ ">
 				</div>
-
-				{{-- <div class="wrap-input100 bg1 rs1-wrap-input100" data-validate = "Vui lòng điền giá loại phòng">
-					<span class="label-input100">Trạng Thái</span>
-					<input class="input100" type="number" name="latitude" placeholder="Giá phòng">
-				</div> --}}
-
-
-				
 
 				<div class="wrap-input100 bg1 " >
 					<span class="label-input100">Mô tả</span>
@@ -71,7 +68,13 @@
 						</span>
 					</button>
 				</div>
+
+				{{-- <div class="wrap-input100 bg1 rs1-wrap-input100" data-validate = "Vui lòng điền giá loại phòng">
+					<span class="label-input100">Trạng Thái</span>
+					<input class="input100" type="number" name="latitude" placeholder="Giá phòng">
+				</div> --}}
 			</form>
+				<img src="moteler_asset/images/{{ $mtl->image }}" alt="">
 		</div>
 	</div>
 </div>
@@ -81,6 +84,8 @@
 	<script src="moteler_asset/form/vendor/bootstrap/js/popper.js"></script>
 	<script src="moteler_asset/form/vendor/bootstrap/js/bootstrap.min.js"></script>
 	<script src="moteler_asset/form/vendor/select2/select2.min.js"></script>
+	<script src="moteler_asset/form/js/main.js"></script>
+
 	<script>
 		$(".js-select2").each(function(){
 			$(this).select2({
@@ -132,7 +137,6 @@
 	        $('.contact100-form-range-value input[name="to-value"]').val($('#value-upper').html());
 	    });
 	</script>
-	<script src="moteler_asset/form/js/main.js"></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>

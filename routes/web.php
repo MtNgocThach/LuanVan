@@ -80,7 +80,8 @@ Route::group(['prefix'=>'moteler','middleware'=>'motelerLogin'],function(){
 
         Route::get('listBills','salesCtrl@getListBills');
         Route::get('updateBill','salesCtrl@updateBill');
-        Route::post('updateBill','salesCtrl@updateBill');
+        Route::post('updateBill','salesCtrl@postupdateBill');
+        Route::post('payDebt','salesCtrl@postPayDebt');
 
 //        Route::get('del/{id}','catalogue_roomCtrl@getDel');
 //
@@ -144,7 +145,7 @@ Route::group(['prefix'=>'moteler','middleware'=>'motelerLogin'],function(){
         // trả phòng
         Route::get('payRoom/{id}','roomsCtrl@getPayRoom');
         Route::post('payRoom/{id}','roomsCtrl@postPayRoom');
-        
+
     });
     // services
     Route::group(['prefix'=>'services'],function(){

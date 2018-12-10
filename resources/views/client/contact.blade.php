@@ -101,23 +101,4 @@
 
 
 <script src="client_asset/js/contact_custom.js"></script>
-<script>
-    $.ajax({
-        url: "https://maps.googleapis.com/maps/api/geocode/json",
-        data: {
-            'key': 'AIzaSyAr3h47KsMPXAQHpDQ1YtLtT0Q0Z_WQ9IA',
-            'address': '430 Hà Duy Phiên, ấp 1 xã Bình Mỹ, Huyện Củ CHi, Tp.HCM',
-            'sensor': 'false',
-            'fbclid': 'IwAR2692wZ6RY4uflXENB2qROCL9hxD1YnokR75M_MJzBT9MuQ-pxE8RBWcOQ',
-        },
-        cache: false,
-        type: "GET",
-        success: function(response) {
-			console.log(response.results);
-        },
-        error: function(xhr) {
-			alert('False');
-        }
-    });
-</script>
 @endsection

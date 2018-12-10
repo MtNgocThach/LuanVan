@@ -36,6 +36,7 @@
 <link rel="stylesheet" type="text/css" href="client_asset/styles/contact_styles.css">
 <link rel="stylesheet" type="text/css" href="client_asset/styles/contact_responsive.css">
 {{--  end contact  --}}
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 
 </head>
 

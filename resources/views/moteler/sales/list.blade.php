@@ -39,7 +39,8 @@
                                     $m_sale = date_format(new DateTime($sale->date), 'm/Y');
                                     $m_now = date('m/Y');
                                     ?>
-                                    @if($sale->id_room == $room->id && $m_sale != $m_now)
+                                    @if($sale->id_room == $room->id && $m_sale == $m_now)
+                                        @else
                                         <tr>
                                             <td id="room_name">
                                                 <div>{{$motel->name}} - {{ $room->name }}</div>
@@ -92,7 +93,6 @@
                                                 </button>
                                             </td>
                                         </tr>
-
                                     @endif
                                 @endforeach
                             @endif

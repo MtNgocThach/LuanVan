@@ -56,7 +56,7 @@
                                         <i class="fa fa-upload"> Thanh toán nợ</i>
                                     </button>
                                 </td>
-                            <?php }else{ ?>
+                            <?php }elseif ($sale->status == 1){ ?>
                                 <td>
                                     <button class="contact100-form-btn" type="button" data-toggle="modal" onclick="detail({{ $sale->id_room }})" data-target="#detaiBilllModal">
                                         <i class="fa fa-upload"> Chi Tiết</i>

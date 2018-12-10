@@ -36,7 +36,7 @@
                                 <div>Mới</div>
                             </td>
                             <td>
-                                <div><input type="text" id="no_elec_old" name="no_elec_old" readonly="true" value=""></div>
+                                <div><input type="text" id="no_elec_old" name="no_elec_old" readonly="true" value="{{ $room->no_elec }}"></div>
                                 <div><input type="text" id="no_elec_new" name="no_elec_new" value=""></div>
                             </td>
                             <td style="text-align: left">
@@ -44,20 +44,29 @@
                                 <div>Mới</div>
                             </td>
                             <td>
-                                <div><input type="text" id="no_water_old" name="no_water_old" readonly="true" value=""></div>
+                                <div><input type="text" id="no_water_old" name="no_water_old" readonly="true" value="{{ $room->no_water }}"></div>
                                 <div><input type="text" id="no_water_new" name="no_water_new" value=""></div>
                             </td>
                             <td>
-                                <div>
-                                    <input type="text" readonly="true"
-                                           value="">
-                                </div>
+                                @foreach($sers as $ser)
+                                    @if($ser->id_mls == $room->id_mls)
+                                        <div>
+                                            <input type="text" readonly="true"
+                                                   value="@if(!in_array($ser->name, array('Điện', 'Nước'))) {{ $ser->name }}@endif">
+                                        </div>
+                                    @endif
+                                @endforeach
                             </td>
 
                             <td>
-                                <div>
-                                    <input type="text" id="price" name="price" readonly="true" value="">
-                                </div>
+                                @foreach($sers as $ser)
+                                    @if($ser->id_mls == $room->id_mls)
+                                        <div>
+                                            <input type="text" id="price_{{$ser->id}}" name="price_{{ $ser->id }}" readonly="true"
+                                                   value="@if(!in_array($ser->name, array('Điện', 'Nước'))) {{$ser->price}} @endif">
+                                        </div>
+                                    @endif
+                                @endforeach
                             </td>
                             <td></td>
                             <td class="act">
@@ -81,16 +90,19 @@
 <script>
 
 </script>
-<style >
-    tbody tr td:nth-child(2) div input, td:nth-child(4) div input, td:nth-child(6) div input, td:nth-child(7){
-        text-align: center;
-        width: 10%;
-    }
-    tbody td:nth-child(9), tbody td:nth-child(10) {
+<style>
+    tbody tr td:nth-child(1), tr td:nth-child(3){
+        width: 100px;
         text-align: left;
+        font-weight: bold;
     }
-    tbody td:nth-child(8){
-        color: red;
+    tbody tr td:nth-child(5) input{
+        width: 100px;
+        text-align: left;
+        font-weight: bold;
+    }
+    tbody tr td:nth-child(2) input, tr td:nth-child(4) input, tr td:nth-child(6) input{
+        width: 80px;
         text-align: center;
     }
 

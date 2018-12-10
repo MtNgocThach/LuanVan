@@ -124,7 +124,6 @@ class salesCtrl extends Controller
         return redirect('moteler/sales/list')->with('mess','Lưu Hoá Đơn Thành công');
     }
 
-
     public function getListBills(){
         $rooms = rooms::where('id_mler', (Auth::user())->id_mler)->where('status', '2')->get();
         $services = services::where('id_mler', (Auth::user())->id_mler)->get();
@@ -181,7 +180,7 @@ class salesCtrl extends Controller
                 return redirect('moteler/sales/listBills')->with('mess','Đã thanh toán hoá đơn');
             }else{
                 $room->debt = $sale->sum - $res->pay;
-                $sale->status = 2;
+                $sale->status = 0;
                 $room->status = 1;
                 $sale->save();
                 $room->save();

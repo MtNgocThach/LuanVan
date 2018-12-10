@@ -53,50 +53,63 @@ class roomsCtrl extends Controller
     //Pay Room
     public function getPayRoom($id){
         $room = rooms::find($id);
+        $sers = services::where('id_mler', (Auth::user())->id_mler)
+                        ->where('id_mls', $id)->get();
         $renter = renter::where('id_room', $id)->get();
 
-        return view('moteler.rooms.payRoom',['room'=>$room]);
+        return view('moteler.rooms.payRoom',['room'=>$room, 'sers'=>$sers]);
     }
 
     public function postPayRoom(Request $res, $id){
-        $save= new sales;
+        $sale= new sales;
         $room = rooms::find($id);
         $renter = renter::where('id_room', $id)->get();
         $room_cost = catalogue_room::where('id', $room->id_ctl)->value('price');
-        $price_elec = services::where('id_mls', $room->id_mls)
-                            ->where('id_mler', (Auth::user())->id_mler)
-                            ->where('name', 'Điện')->value('price');
-        $price_water = services::where('id_mls', $room->id_mls)
-                            ->where('id_mler', (Auth::user())->id_mler)
-                            ->where('name', 'Nước')->value('price');
+        $sers = services::where('id_mler', (Auth::user())->id_mler)
+                        ->where('id_mls', $id)->get();
 
-        $room->status = 1;
-        $room->debt = 0;
+        $price_elec         = services::where('id_mls', $room->id_mls)
+                                    ->where('id_mler', (Auth::user())->id_mler)
+                                    ->where('name', 'Điện')->value('price');
+        $price_water        = services::where('id_mls', $room->id_mls)
+                                    ->where('id_mler', (Auth::user())->id_mler)
+                                    ->where('name', 'Nước')->value('price');
 
-        $renter->id_room = 0;
-        $renter->date_end = date("d/m/Y");
-        $renter->note = $id;
+        $cost_ser = 0;
+        foreach ($sers as $ser){
+            $price =$res->input('price_'.$ser->id);
+            $cost_ser = $price;
+        }
 
-        $save->id_room = $id;
-        $save->id_mler = (Auth::user())->id_mler;
-        $save->id_mls = $room->id_mls;
-        $save->room_cost = $room_cost;
-        $save->no_elec_old = $room->no_elec;
-        $save->no_elec_new = $res->no_elec_new;
-        $save->no_water_old = $room->no_water;
-        $save->no_water_new= $res->no_water_new;
-        $save->price_elec = $price_elec;
-        $save->price_water = $price_water;
-        $save->debt = '';
-        $save->sum = '';
-        $save->status = 4;
-        $save->date = date("d/m/Y");
-//        $renter->date_pay = date("d/m/Y");
+        $room->status       = 0;
+        $room->debt         = 0;
 
-        var_dump(111);die;
-        $save->save();
+        $renter->id_room    = 0;
+        $renter->date_end   = date("Y/m/d");
+        $renter->note       = $id;
+
+        $sale->id_room      = $id;
+        $sale->id_mler      = (Auth::user())->id_mler;
+        $sale->id_mls       = $room->id_mls;
+        $sale->room_cost    = $room_cost;
+        $sale->no_elec_old  = $room->no_elec;
+        $sale->no_elec_new  = $res->no_elec_new;
+        $sale->no_water_old = $room->no_water;
+        $sale->no_water_new = $res->no_water_new;
+        $sale->price_elec   = $price_elec;
+        $sale->price_water  = $price_water;
+        $sale->debt         = $res->debt;
+        $sale->sum          = $room_cost + ($sale->no_elec_new-$sale->no_elec_old)*$price_elec + $cost_ser +
+                                ($sale->no_water_new-$sale->no_water_old)*$price_water + $sale->debt;
+        $sale->status       = 4;
+        $sale->date         = date("Y/m/d");
+        $renter->date_pay = date("Y/m/d");
+
+        $sale->save();
         $renter->save();
         $room->save();
+
+        return redirect('moteler/rooms/payRoom/'.$id)->with('mess',' Vui lòng thanh toán: '.$sale->sum);
 
     }
 

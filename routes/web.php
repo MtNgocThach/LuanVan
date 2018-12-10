@@ -73,24 +73,29 @@ Route::group(['prefix'=>'moteler','middleware'=>'motelerLogin'],function(){
         
     });
 
+    //statistics
+
+    Route::group(['prefix'=>'statistics'],function(){
+
+        Route::get('statistic','statisticsCtrl@showStatistics');
+
+
+    });
+
     // sales
     Route::group(['prefix'=>'sales'],function(){
 
         Route::get('list','salesCtrl@getList');
 
+        Route::post('create','salesCtrl@createSales');
+
         Route::get('listBills','salesCtrl@getListBills');
+
         Route::get('updateBill','salesCtrl@updateBill');
         Route::post('updateBill','salesCtrl@postupdateBill');
+
         Route::post('payDebt','salesCtrl@postPayDebt');
 
-//        Route::get('del/{id}','catalogue_roomCtrl@getDel');
-//
-//        Route::get('edit/{id}','catalogue_roomCtrl@getEdit');
-        Route::post('create','salesCtrl@createSales');
-//        Route::post('edit/{id}','catalogue_roomCtrl@postEdit');
-//
-//        Route::get('add','catalogue_roomCtrl@getAdd');
-//        Route::post('add','catalogue_roomCtrl@postAdd');
 
     });
     

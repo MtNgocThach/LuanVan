@@ -21,7 +21,9 @@
 						<!-- Mostel Post -->
 						@foreach ($crs as $cr)						
 							@if($ctl->id == $cr->id_ctlg)
-								@if($cr->motels->status == 1)
+								<?php foreach ($mtls as $mtl) {
+								    if ($mtl->id == $cr->id_mls) {?>
+								@if($mtl->status == 1)
 									<article class="blog_post">
 										<div class="blog_post_image">
 											@if($cr->motels->image != '')
@@ -37,11 +39,7 @@
 											<span class="blog_post_comments">{{ $cr->price }} vnđ</span>
 										</div>
 										<div class="blog_post_text">
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vestibulum,
-												quam tincidunt venen. Cras pharetra vel ex ut imperdiet. Lorem ipsum dolor sit amet,
-												consectetur adipiscing elit. Maecenas consectetur neque non felis placerat,
-												nec luctus nunc ullamcorper.
-											</p>
+											<p>{{ $cr->description }}</p>
 										</div>
 										<a href="client/blog_detail/{{ $cr->id }}" class="blog_post_link">chi tiết
 											<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -51,8 +49,7 @@
 										</a>
 									</article>
 								@endif
-
-
+								<?php } }?>
 							@endif
 						@endforeach
 					</div>					

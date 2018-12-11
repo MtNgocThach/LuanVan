@@ -11,7 +11,6 @@
 			</div>
 			@endif
 
-
 			<form class="contact100-form validate-form" action="moteler/catalogue_room/add" method="POST">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<span class="contact100-form-title">

@@ -62,7 +62,7 @@
                             map: map,
                             icon: image,
                             //shape: shape,
-                            title: beach[0],
+                            title: 'Nhà trọ: ' + beach[0] + 'địa chỉ' + beach[1],
                             //zIndex: beach[3] 
                         });
                     }

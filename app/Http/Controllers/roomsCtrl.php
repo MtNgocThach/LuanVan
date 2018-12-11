@@ -103,7 +103,7 @@ class roomsCtrl extends Controller
                                 ($sale->no_water_new-$sale->no_water_old)*$price_water + $sale->debt;
         $sale->status       = 4;
         $sale->date         = date("Y/m/d");
-        $renter->date_pay = date("Y/m/d");
+        $renter->date_pay   = date("Y/m/d");
 
         $sale->save();
         $renter->save();
@@ -209,12 +209,19 @@ class roomsCtrl extends Controller
         $renter->date_start = date('Y/m/d');
         $renter->note = $renter->note . '- Đổi từ phòng ' . $rm->name . ' sang phòng ' . $room_change->name;
 
+        $price_elec = '';
+        $price_water = '';
+
         foreach ($services as $service) {
             if ($service->id_mls == $rm->id_mls && $service->name == 'Điện'){
-                $price_elec = $service->price;
+                if (isset($service->price)){
+                    $price_elec = $service->price;
+                }
             }
             if ($service->id_mls == $rm->id_mls && $service->name == 'Nước'){
-                $price_water = $service->price;
+                if (isset($service->price)){
+                    $price_water = $service->price;
+                }
             }
         }
         $no_elec  = $res->no_elec_new - $res->no_elec_old;
@@ -239,7 +246,7 @@ class roomsCtrl extends Controller
 
         return redirect('moteler/rooms/list')->with('mess','Đổi phòng thành công');
 
-        var_dump($room_change->date_change);die;
+//        var_dump($room_change->date_change);die;
         return true;
     }
 }

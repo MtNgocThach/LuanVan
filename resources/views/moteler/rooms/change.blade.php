@@ -79,6 +79,7 @@
                             <td>Đổi phòng</td>
                             <td colspan="2">
                                 <select id="id_room_change" name="id_room_change" class="input100" class="validate-input" onchange="set()" style="border-radius:5px; width:90%">
+                                    <option value=""></option>
                                     @foreach($rooms as $room)
                                         <option value="{{ $room->id }}">{{ $room->name }}</option>
                                     @endforeach
